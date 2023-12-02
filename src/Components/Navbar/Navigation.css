@@ -44,7 +44,10 @@
 
 @media screen and (max-width: 992px) {
 
-    #logo,
+    #logo{
+        width: 3em;
+        height: 3em;
+    }
     #profile {
         width: 2em;
         height: 2em;

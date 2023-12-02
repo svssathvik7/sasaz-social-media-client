@@ -34,3 +34,56 @@
 #online-friends-heading {
     color: white;
 }
+
+/* Mobile viewport */
+@media (max-width:768px) {
+    #online-friends {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: fit-content;
+        max-height: 100dvh;
+        width: -moz-fit-content;
+        width: fit-content;
+        padding: 2%;
+        background-color: rgb(40, 38, 38);
+        position: absolute;
+        z-index: 10;
+        right: 0;
+        bottom: 0;
+        animation: grow 0.3s ease;
+        scrollbar-width: 0px;
+        border-radius: 2rem;
+    }
+    @keyframes grow {
+        from{
+            opacity: 0.7;
+            transform: scale(0.9);
+        }
+        to{
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    #online-friends-scroller {
+        overflow-y: scroll;
+        flex-direction: column;
+        max-height: 65dvh;
+        height: fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        padding: 1em;
+        display: flex;
+        gap: 1em;
+    }
+    #friend-div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 2%;
+        width: 10dvw;
+        color: white;
+        cursor: pointer;
+    }
+}

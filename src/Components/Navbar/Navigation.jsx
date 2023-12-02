@@ -4,7 +4,7 @@ import icon2 from "../../assets/Favicon.png";
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
-const Navigation = () => {
+const Navigation = (props) => {
     const [mobile, setMobile] = useState(false);
     useEffect(() => {
         const windowSize = window.innerWidth;
@@ -28,7 +28,7 @@ const Navigation = () => {
                     </ul>
                 }
             </div>
-            <Logo src={icon2} id='profile' />
+            <Logo func={props.handleOnlineFriends} src={icon2} id='profile'/>
         </nav>
     )
 }
