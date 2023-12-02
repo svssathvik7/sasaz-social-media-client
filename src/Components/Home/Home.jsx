@@ -2,6 +2,7 @@ import React from 'react'
 import Navigation from "../Navbar/Navigation";
 import Feed from '../Feed/Feed';
 import OnlineFiends from '../OnlineFriends/OnlineFriends';
+import postConstants from '../../Constants/PostConstants';
 import './Home.css';
 const Home = () => {
   return (
@@ -10,9 +11,11 @@ const Home = () => {
       <div id='right-section'>
         <Navigation />
         <div id='feed-section'>
-          <Feed />
-          <Feed />
-          <Feed />
+          {postConstants.map(post => (
+            <div key={post.id}>
+              <Feed data={post}/>
+            </div>
+          ))}
         </div>
       </div>
     </div>

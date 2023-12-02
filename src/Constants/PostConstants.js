@@ -1,0 +1,17 @@
+const postConstants = [
+    {
+        id : 1,
+        dp : require("../assets/image.png"),
+        username : "azeem_shaik025",
+        type : "image",
+        post : require("../assets/logo.webp")
+    },
+    {
+        id : 2,
+        dp : require("../assets/image.png"),
+        username : "sathvik77",
+        type : "tweet",
+        post : "Hello! Will India make it to the finals this time?"
+    },
+]
+export default postConstants;
