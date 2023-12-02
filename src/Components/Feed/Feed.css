@@ -5,9 +5,17 @@
 #post-meta{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     background-color: antiquewhite;
     padding: 2%;
+}
+#post-meta-user-details{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.font-awesome-icon{
+    cursor: pointer;
 }
 #post-user{
     cursor: pointer;
@@ -29,14 +37,25 @@
 #post-metrics{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     padding-left: 2%;
     background-color: blanchedalmond;
     width: 100%;
     padding: 2%;
 }
-.font-awesome-icon{
+#metrics{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 10dvw;
+}
+.font-awesome-metric-icon{
     margin-right: 2%;
     font-size: 1.5em;
     cursor: pointer;
+}
+#fav-post{
+    font-size: 1.5em;
+    cursor: pointer;
+    margin: 2%;
 }
