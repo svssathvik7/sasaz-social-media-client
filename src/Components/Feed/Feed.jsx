@@ -1,8 +1,11 @@
 import React from 'react'
-import feedImage from '../../assets/Demo.webp';
+import feedImage from '../../assets/feedDemo.webp';
+import './Feed.css';
 const Feed = () => {
     return (
-        <img src={feedImage} alt="Post" />
+        <div id='feed-post'>
+            <img src={feedImage} alt="Post" />
+        </div>
     )
 }
 

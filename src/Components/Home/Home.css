@@ -1,6 +1,21 @@
+#main-section {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    overflow-y: hidden;
+}
+
+#right-section {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex: 1 1;
+    width: auto;
+    overflow: auto;
+}
+
 #feed-section {
-    margin-top: 7em;
-    width: 100vw;
+    margin-top: 5em;
     display: flex;
     flex-direction: column;
     align-items: center;

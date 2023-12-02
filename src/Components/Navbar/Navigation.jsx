@@ -1,19 +1,19 @@
 import React from 'react'
-import icon1 from "../../assets/Favicon.png";
-import icon2 from "../../assets/Logo.png";
+import icon1 from "../../assets/favicon.png";
+import icon2 from "../../assets/favicon.png";
 import Logo from './Logo';
 import './Navigation.css';
 const Navigation = () => {
     return (
         <nav>
             <div id='nav-main1'>
-                <Logo src={icon1}/>
+                <Logo src={icon1} />
                 <ul>
-                    <li>NavLink</li>
-                    <li>NavLink</li>
-                    <li>NavLink</li>
-                    <li>NavLink</li>
-                    <li>NavLink</li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">NavLinks</a></li>
+                    <li><a href="#">NavLinks</a></li>
+                    <li><a href="#">NavLinks</a></li>
+                    <li><a href="#">NavLinks</a></li>
                 </ul>
             </div>
             <Logo src={icon2} />
