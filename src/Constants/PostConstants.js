@@ -41,7 +41,7 @@ const postConstants = [
         dp: require("../assets/image.png"),
         username: "sathish1007",
         type: "image",
-        post: require("../assets/logo.webp")
+        post: require("../assets/feedDemo.webp")
     },
     {
         id: 7,
