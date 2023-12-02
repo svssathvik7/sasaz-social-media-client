@@ -61,7 +61,7 @@ export default function OnlineFriends() {
       <div id='online-friends-scroller'>
         {frnds.map(frnd => (
           <div key={frnd.id} id='friend-div'>
-            <img src={frnd.displaypicture} />
+            <img alt={"Dp"} src={frnd.displaypicture} />
             <h4>{frnd.username}</h4>
           </div>
         ))}

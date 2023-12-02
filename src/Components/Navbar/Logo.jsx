@@ -2,7 +2,7 @@ import React from 'react'
 import './Navigation.css';
 const Logo = (props) => {
     return (
-        <img id='logo' src={props.src} alt="Logo Icon" />
+        <img src={props.src} alt="Logo Icon" id={props.id} />
     );
 }
 

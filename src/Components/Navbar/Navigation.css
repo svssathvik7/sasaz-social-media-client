@@ -7,7 +7,6 @@ nav {
     align-items: center;
     padding: 1em 2em;
 }
-
 nav ul {
     display: flex;
     gap: 2em;
@@ -18,14 +17,18 @@ nav ul li {
     list-style-type: none;
 }
 
-nav ul li a {
+.navlinks{
     text-decoration: none;
     color: #fff;
 }
 
-#logo {
+#profile {
     width: 2em;
     height: 2em;
+}
+#logo{
+    width: 3em;
+    height: 3em;
 }
 
 #nav-main1 {
