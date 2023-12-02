@@ -6,7 +6,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1em 2em;
+    z-index: 9;
 }
+
 nav ul {
     display: flex;
     gap: 2em;
@@ -17,7 +19,7 @@ nav ul li {
     list-style-type: none;
 }
 
-.navlinks{
+.navlinks {
     text-decoration: none;
     color: #fff;
 }
@@ -26,7 +28,8 @@ nav ul li {
     width: 2em;
     height: 2em;
 }
-#logo{
+
+#logo {
     width: 3em;
     height: 3em;
 }

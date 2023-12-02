@@ -12,6 +12,7 @@
     flex: 1 1;
     width: auto;
     overflow: auto;
+    background-color: #e7e7e7;
 }
 
 #feed-section {

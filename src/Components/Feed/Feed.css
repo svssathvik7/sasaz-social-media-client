@@ -1,61 +1,85 @@
 #feed-post {
-    width: 35dvw;
+    width: fit-content;
     height: fit-content;
+    transition: 0.5s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
 }
-#post-meta{
+
+#post-meta {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: antiquewhite;
+    background-color: white;
     padding: 2%;
+    border-bottom: 1px solid black;
 }
-#post-meta-user-details{
+
+#post-meta-user-details {
     display: flex;
     align-items: center;
     justify-content: start;
+    gap: 10px;
 }
-.font-awesome-icon{
+
+.font-awesome-icon {
     cursor: pointer;
 }
-#post-user{
+
+#post-user {
     cursor: pointer;
 }
-#post-dp{
+
+#post-dp {
     width: 3em;
     border: thick solid #000;
     border-radius: 100%;
     margin: 1%;
     padding: 1%;
 }
-#post{
+
+#post {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: slategray;
-    padding: 2%;
+    background-color: white;
+    border-bottom: 1px solid black;
 }
-#post-metrics{
+
+#post h4 {
+    padding: 5%;
+}
+
+#post-metrics {
     display: flex;
-    align-items: center;
+    align-items: self-start;
     justify-content: space-between;
     padding-left: 2%;
-    background-color: blanchedalmond;
+    background-color: white;
     width: 100%;
     padding: 2%;
 }
-#metrics{
+
+#metrics {
     display: flex;
-    align-items: center;
+    align-items: self-start;
     justify-content: space-around;
     width: 10dvw;
+    gap: 1.5%;
 }
-.font-awesome-metric-icon{
+
+.font-awesome-metric-icon {
     margin-right: 2%;
     font-size: 1.5em;
     cursor: pointer;
+    text-align: center;
 }
-#fav-post{
+
+.font-awesome-metric-icon p {
+    font-size: 0.5em;
+}
+
+#fav-post {
     font-size: 1.5em;
     cursor: pointer;
-    margin: 2%;
+    margin: 0 2%;
 }
