@@ -13,5 +13,13 @@ const postConstants = [
         type : "tweet",
         post : "Hello! Will India make it to the finals this time?"
     },
+    ,
+    {
+        id : 3,
+        dp : require("../assets/image.png"),
+        username : "sathish1007",
+        type : "image",
+        post : require("../assets/logo.webp")
+    },
 ]
 export default postConstants;
