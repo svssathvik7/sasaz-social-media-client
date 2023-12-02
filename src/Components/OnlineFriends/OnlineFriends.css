@@ -42,41 +42,47 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        height: -moz-fit-content;
         height: fit-content;
         max-height: 100dvh;
         width: -moz-fit-content;
         width: fit-content;
-        padding: 2%;
+        padding: 3%;
         background-color: rgb(40, 38, 38);
         position: absolute;
         z-index: 10;
         right: 0;
-        bottom: 0;
+        bottom: 5px;
         animation: grow 0.3s ease;
         scrollbar-width: 0px;
-        border-radius: 2rem;
+        border-radius: 1em;
     }
+
     @keyframes grow {
-        from{
+        from {
             opacity: 0.7;
             transform: scale(0.9);
         }
-        to{
+
+        to {
             opacity: 1;
             transform: scale(1);
         }
     }
+
     #online-friends-scroller {
         overflow-y: scroll;
         flex-direction: column;
         max-height: 65dvh;
+        height: -moz-fit-content;
         height: fit-content;
         width: -moz-fit-content;
         width: fit-content;
-        padding: 1em;
+        padding: 1em 2em 1em 10px;
         display: flex;
         gap: 1em;
     }
+
     #friend-div {
         display: flex;
         align-items: center;
