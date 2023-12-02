@@ -2,7 +2,7 @@
     width: 100dvw;
     height: 100dvh;
     display: flex;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 #right-section {
