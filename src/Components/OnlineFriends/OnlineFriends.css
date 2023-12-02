@@ -1,0 +1,33 @@
+#online-friends{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    height: 100dvh;
+    top: 0;
+    width: fit-content;
+    padding: 2%;
+    background-color: #000;
+}
+#online-friends-scroller{
+    overflow: scroll;
+    flex-direction: column;
+    align-items: center;
+    height: 75dvh;
+    justify-content: center;
+    width: fit-content;
+}
+#friend-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    width: 15dvw;
+    color: white;
+    cursor: pointer;
+}
+#online-friends-heading{
+    color: white;
+}

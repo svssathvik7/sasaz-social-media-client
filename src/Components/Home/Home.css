@@ -1,0 +1,10 @@
+#feed-section {
+    margin-top: 7em;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2em 0em;
+    gap: 2em;
+}
