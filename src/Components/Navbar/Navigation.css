@@ -1,4 +1,4 @@
-nav {
+#maxi-navigation {
     width: -webkit-fill-available;
     position: fixed;
     display: flex;
@@ -9,19 +9,19 @@ nav {
     z-index: 9;
 }
 
-nav ul {
+#maxi-navigation ul {
     display: flex;
     gap: 2em;
     color: #fff;
 }
 
-nav ul li {
+#maxi-navigation ul li {
     list-style-type: none;
 }
 
 .navlinks {
     text-decoration: none;
-    color: #fff;
+    color: white
 }
 
 #profile {
@@ -38,4 +38,38 @@ nav ul li {
     display: flex;
     align-items: center;
     gap: 5em;
+}
+
+
+
+@media screen and (max-width: 992px) {
+
+    #logo,
+    #profile {
+        width: 2em;
+        height: 2em;
+    }
+
+    #mini-navigation {
+        display: flex;
+        width: 100%;
+        position: fixed;
+        bottom: 5%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #mini-navigation ul {
+        font-size: min(3.5vw, 1em);
+        display: flex;
+        gap: 4vw;
+        padding: 2% 3%;
+        background: rgb(43, 43, 43);
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    }
+
+    #mini-navigation ul li {
+        list-style-type: none;
+    }
 }

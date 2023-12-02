@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navigation from "../Navbar/Navigation";
 import Feed from '../Feed/Feed';
 import OnlineFiends from '../OnlineFriends/OnlineFriends';
 import postConstants from '../../Constants/PostConstants';
+import MiniNavigation from '../Navbar/MiniNavigation';
 import './Home.css';
 const Home = () => {
-  //   ref = { ref }
-  //   style = {
-  //                 {
-  //     opacity: isInView ? 1 : 0.5,
-  //       transform: isInView ? 'translateY(0px)' : 'translateY(-20px)',
-  //         scale: isInView ? 1 : 0.8,
-  //                 }
-  // }
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const windowSize = window.innerWidth;
+    if (windowSize < 992) {
+      setMobile(true);
+    }
+  },[]);
   return (
     <div id='main-section'>
       <OnlineFiends />
@@ -26,6 +26,7 @@ const Home = () => {
           ))}
         </div>
       </div>
+      {mobile && <MiniNavigation />}
     </div>
   )
 };

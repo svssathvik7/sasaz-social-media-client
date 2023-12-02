@@ -1,23 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import icon1 from "../../assets/Favicon.png";
 import icon2 from "../../assets/Favicon.png";
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 const Navigation = () => {
+    const [mobile, setMobile] = useState(false);
+    useEffect(() => {
+        const windowSize = window.innerWidth;
+        console.log(windowSize);
+        if (windowSize < 992) {
+            setMobile(true);
+        }
+    }, []);
     return (
-        <nav>
+        <nav id='maxi-navigation'>
             <div id='nav-main1'>
-                <Logo src={icon1} id='logo'/>
-                <ul>
-                    <li><Link className='navlinks' to="/">Home</Link></li>
-                    <li><Link className='navlinks' to="/">NavLinks</Link></li>
-                    <li><Link className='navlinks' to="/">NavLinks</Link></li>
-                    <li><Link className='navlinks' to="/">NavLinks</Link></li>
-                    <li><Link className='navlinks' to="/">NavLinks</Link></li>
-                </ul>
+                <Logo src={icon1} id='logo' />
+                {
+                    !mobile &&
+                    <ul>
+                        <li><Link className='navlinks' to="/">Home</Link></li>
+                        <li><Link className='navlinks' to="/">NavLinks</Link></li>
+                        <li><Link className='navlinks' to="/">NavLinks</Link></li>
+                        <li><Link className='navlinks' to="/">NavLinks</Link></li>
+                        <li><Link className='navlinks' to="/">NavLinks</Link></li>
+                    </ul>
+                }
             </div>
-            <Logo src={icon2} id='profile'/>
+            <Logo src={icon2} id='profile' />
         </nav>
     )
 }

@@ -14,10 +14,11 @@
     overflow-y: scroll;
     flex-direction: column;
     height: 65dvh;
-    justify-content: center;
     width: -moz-fit-content;
     width: fit-content;
     padding: 1em;
+    display: flex;
+    gap: 1em;
 }
 
 #friend-div {

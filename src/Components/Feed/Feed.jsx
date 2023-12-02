@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { motion, transform, useInView } from "framer-motion";
+import React, { useState, useRef } from 'react'
+import { motion, useInView } from "framer-motion";
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faSolid } from '@fortawesome/free-regular-svg-icons';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import './Feed.css';
