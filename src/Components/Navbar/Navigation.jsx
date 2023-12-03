@@ -22,9 +22,9 @@ const Navigation = (props) => {
                     !mobile &&
                     <ul>
                         <li><Link className='navlinks' to="/">Home</Link></li>
-                        <li><Link className='navlinks' to="/">Search</Link></li>
-                        <li><Link className='navlinks' to="/">Message Friends</Link></li>
-                        <li><Link className='navlinks' to="/">Explore</Link></li>
+                        <li><Link className='navlinks' to="/search">Search</Link></li>
+                        <li><Link className='navlinks' to="/message">Message Friends</Link></li>
+                        <li><Link className='navlinks' to="/explore">Explore</Link></li>
                     </ul>
                 }
             </div>
