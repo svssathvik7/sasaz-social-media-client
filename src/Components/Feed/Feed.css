@@ -17,7 +17,7 @@
 #post-meta-user-details {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 10px;
 }
 
@@ -51,7 +51,7 @@
 
 #post-metrics {
     display: flex;
-    align-items: self-start;
+    align-items: flex-start;
     justify-content: space-between;
     padding-left: 2%;
     background-color: white;
@@ -61,7 +61,7 @@
 
 #metrics {
     display: flex;
-    align-items: self-start;
+    align-items: flex-start;
     justify-content: space-around;
     width: 10dvw;
     gap: 1.5%;
@@ -92,6 +92,7 @@
         transition: 0.5s ease-in-out;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
     }
+
     #post-meta {
         display: flex;
         align-items: center;
@@ -100,24 +101,27 @@
         padding: 2%;
         border-bottom: 1px solid black;
     }
+
     #post-meta-user-details {
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: flex-start;
         gap: 10px;
     }
+
     #post-metrics {
         display: flex;
-        align-items: self-start;
+        align-items: flex-start;
         justify-content: space-between;
         padding-left: 2%;
         background-color: white;
         width: 100%;
         padding: 2%;
     }
+
     #metrics {
         display: flex;
-        align-items: self-start;
+        align-items: flex-start;
         justify-content: space-around;
         width: 25dvw;
         gap: 1.5%;
