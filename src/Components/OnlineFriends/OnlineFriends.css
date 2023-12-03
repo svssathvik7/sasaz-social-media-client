@@ -78,18 +78,17 @@
         height: fit-content;
         width: -moz-fit-content;
         width: fit-content;
-        padding: 1em 2em 1em 10px;
         display: flex;
-        gap: 1em;
     }
 
     #friend-div {
         display: flex;
         align-items: center;
-        gap: 10px;
         padding: 2%;
-        width: 10dvw;
+        width: fit-content;
         color: white;
         cursor: pointer;
+        align-items: center;
+        justify-content: center;
     }
 }
