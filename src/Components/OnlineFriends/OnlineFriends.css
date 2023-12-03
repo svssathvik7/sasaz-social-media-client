@@ -1,12 +1,13 @@
 #online-friends {
+    gap: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     height: 100dvh;
     width: -moz-fit-content;
     width: fit-content;
-    padding: 2%;
+    padding: 6em 2% 0em;
     background-color: rgb(40, 38, 38);
 }
 

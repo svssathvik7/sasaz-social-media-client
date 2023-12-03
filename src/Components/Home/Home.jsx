@@ -13,16 +13,16 @@ const Home = () => {
     if (windowSize < 992) {
       setMobile(true);
     }
-  },[]);
-  const [onlineUsers,setOnlineUsers] = useState(false);
-  const handleOnlineFriends = ()=>{
+  }, []);
+  const [onlineUsers, setOnlineUsers] = useState(false);
+  const handleOnlineFriends = () => {
     setOnlineUsers(!onlineUsers);
   }
   return (
     <div id='main-section'>
-      {mobile ? onlineUsers ? <MiniOnlineFriends/> : <></>: <OnlineFiends/>}
+      {mobile ? onlineUsers ? <MiniOnlineFriends /> : <></> : <OnlineFiends />}
       <div id='right-section'>
-        <Navigation handleOnlineFriends={handleOnlineFriends}/>
+        {/* <Navigation handleOnlineFriends={handleOnlineFriends} /> */}
         <div id='feed-section'>
           {postConstants.map(post => (
             <div key={post.id}>
@@ -31,7 +31,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      {mobile && <MiniNavigation/>}
+      {/* {mobile && <MiniNavigation />} */}
     </div>
   )
 };
