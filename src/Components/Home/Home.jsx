@@ -22,7 +22,6 @@ const Home = () => {
     <div id='main-section'>
       {mobile ? onlineUsers ? <MiniOnlineFriends /> : <></> : <OnlineFiends />}
       <div id='right-section'>
-        {/* <Navigation handleOnlineFriends={handleOnlineFriends} /> */}
         <div id='feed-section'>
           {postConstants.map(post => (
             <div key={post.id}>
@@ -31,7 +30,6 @@ const Home = () => {
           ))}
         </div>
       </div>
-      {/* {mobile && <MiniNavigation />} */}
     </div>
   )
 };

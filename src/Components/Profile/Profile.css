@@ -1,0 +1,121 @@
+#profile-main {
+    display: flex;
+    padding-top: 5em;
+    height: 100dvh;
+    overflow-y: hidden;
+}
+
+#profile-dynamics {
+    display: flex;
+    flex: 1 1;
+    justify-content: center;
+    height: fit-content;
+    margin-top: 5em;
+}
+
+/* Side Bar Styling */
+
+#profile-sidebar {
+    width: -moz-fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1.5em;
+    padding: 2em;
+    background-color: rgb(54, 53, 53);
+    height: 88vh;
+}
+
+#profile-sidebar ul {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+}
+
+#profile-sidebar ul>* {
+    padding: 1em 0em;
+}
+
+button:nth-child(1) {
+    border-top: 2px solid black;
+}
+
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 2px solid black;
+    font-size: 1em;
+}
+
+#profile-sidebar-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+/* Profile Edit Details Styling */
+#profile-edit-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5em;
+}
+
+#profile-edit-main>* {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: calc(30% - 10px);
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+#profile-edit-main input {
+    background: #e7e7e7;
+    border: 0;
+    padding: 10px 15px 10px 8px;
+}
+
+#profile-edit-main h3 {
+    padding: 6%;
+    border: 1px solid black;
+}
+
+
+/* Profile Posts Section Styling */
+#profile-feed-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+#profile-feed-main #profile-navigation {
+    display: flex;
+    width: -webkit-fill-available;
+    position: fixed;
+    bottom: 5%;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile-feed-main #profile-navigation ul {
+    font-size: min(3.5vw, 1em);
+    display: flex;
+    gap: 4vw;
+    padding: 1.5% 4%;
+    background: rgb(43, 43, 43);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+}
+
+#profile-feed-main #profile-navigation ul li {
+    list-style-type: none;
+}
