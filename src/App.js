@@ -7,9 +7,8 @@ import Message from './Components/Message/Message';
 import Profile from './Components/Profile/Profile';
 import { useEffect, useState } from 'react';
 import Navigation from './Components/Navbar/Navigation';
-import MiniOnlineFriends from './Components/OnlineFriends/MiniOnlineFriends';
-import OnlineFriends from './Components/OnlineFriends/OnlineFriends';
 import MiniNavigation from './Components/Navbar/MiniNavigation';
+import Authentication from './Components/Authentication/Authentication';
 function App() {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -27,6 +26,7 @@ function App() {
       <Navigation handleOnlineFriends={handleOnlineFriends} />
       <Routes>
         <Route path='/' exact Component={Home} />
+        <Route path='/auth' exact Component={Authentication} />
         <Route path='/search' exact Component={Search} />
         <Route path='/explore' exact Component={Explore} />
         <Route path='/message' exact Component={Message} />

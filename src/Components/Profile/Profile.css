@@ -38,11 +38,11 @@
     padding: 1em 0em;
 }
 
-button:nth-child(1) {
+#profile-sidebar ul button:nth-child(1) {
     border-top: 2px solid black;
 }
 
-button {
+#profile-sidebar ul button {
     cursor: pointer;
     background-color: transparent;
     border: 0px;
