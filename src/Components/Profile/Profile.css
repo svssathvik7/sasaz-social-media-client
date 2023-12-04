@@ -7,10 +7,11 @@
 
 #profile-dynamics {
     display: flex;
-    flex: 1 1;
     justify-content: center;
-    height: fit-content;
-    margin-top: 5em;
+    flex: 1 1;
+    height: -moz-fit-content;
+    height: -webkit-fill-available;
+    overflow-y: scroll;
 }
 
 /* Side Bar Styling */
@@ -63,8 +64,10 @@
 #profile-edit-main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 5em;
+    gap: 2em;
+    padding: 5em;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #profile-edit-main>* {
@@ -95,6 +98,8 @@
     justify-content: center;
     align-items: center;
     gap: 2em;
+    height: fit-content;
+    padding: 5em 0em 6em;
 }
 
 #profile-feed-main #profile-navigation {
