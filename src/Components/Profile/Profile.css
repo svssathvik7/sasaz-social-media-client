@@ -27,12 +27,14 @@
     padding: 2em;
     background-color: rgb(54, 53, 53);
     height: 88vh;
+    color: white;
 }
 
 #profile-sidebar ul {
     display: flex;
     flex-direction: column;
     width: -webkit-fill-available;
+    color: white;
 }
 
 #profile-sidebar ul>* {
@@ -49,6 +51,7 @@
     border: 0px;
     border-bottom: 2px solid black;
     font-size: 1em;
+    color: white;
 }
 
 #profile-sidebar-main {
