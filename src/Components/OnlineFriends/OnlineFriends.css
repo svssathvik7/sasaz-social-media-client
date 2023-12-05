@@ -1,24 +1,24 @@
 #online-friends {
-    gap: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100dvh;
+    height: 90dvh;
     width: -moz-fit-content;
     width: fit-content;
-    padding: 6em 2% 0em;
+    padding: 2%;
     background-color: rgb(40, 38, 38);
 }
 
 #online-friends-scroller {
     overflow-y: scroll;
     flex-direction: column;
-    height: 65dvh;
+    height: 90dvh!important;
     width: -moz-fit-content;
     width: fit-content;
-    padding: 1em;
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     gap: 1em;
 }
 

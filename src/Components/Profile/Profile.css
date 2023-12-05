@@ -1,7 +1,6 @@
 #profile-main {
     display: flex;
-    padding-top: 5em;
-    height: 100dvh;
+    height: 90dvh;
     overflow-y: hidden;
 }
 
@@ -26,7 +25,7 @@
     gap: 1.5em;
     padding: 2em;
     background-color: rgb(54, 53, 53);
-    height: 88vh;
+    height: 90dvh;
     color: white;
 }
 
@@ -102,26 +101,34 @@
     align-items: center;
     gap: 2em;
     height: fit-content;
-    padding: 5em 0em 6em;
+    padding: 2%;
 }
 
-#profile-feed-main #profile-navigation {
+#profile-feed-main #profile-navigation{
     display: flex;
-    width: -webkit-fill-available;
+    width: fit-content;
     position: fixed;
-    bottom: 5%;
+    bottom: 0;
+    right: 0;
+    height: fit-content;
     align-items: center;
     justify-content: center;
+    padding: 2%;
 }
 
-#profile-feed-main #profile-navigation ul {
+#profile-feed-main #profile-navigation ul{
     font-size: min(3.5vw, 1em);
     display: flex;
     gap: 4vw;
-    padding: 1.5% 4%;
+    padding: 2%;
     background: rgb(43, 43, 43);
-    border-radius: 10px;
+    border-radius: 1rem;
+    width: 15dvw;
+    height: 5dvh;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #profile-feed-main #profile-navigation ul li {

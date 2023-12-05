@@ -57,7 +57,7 @@ export default function OnlineFriends() {
   ]);
   return (
     <div id='online-friends'>
-      <h2 id='online-friends-heading'>Online Friends</h2>
+      {/* <h2 id='online-friends-heading'>Online Friends</h2> */}
       <div id='online-friends-scroller'>
         {frnds.map(frnd => (
           <div key={frnd.id} id='friend-div'>

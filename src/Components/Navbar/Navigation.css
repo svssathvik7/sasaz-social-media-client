@@ -1,6 +1,5 @@
 #maxi-navigation {
     width: -webkit-fill-available;
-    position: fixed;
     display: flex;
     background-color: rgb(19, 17, 17);
     justify-content: space-between;
