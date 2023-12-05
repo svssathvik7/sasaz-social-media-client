@@ -5,36 +5,48 @@
     flex-direction: column;
 }
 #explore-posts {
-    box-shadow: 2px 2px 8px #000;
-    display: flex;
-    overflow-x: auto;
-  }
+  box-shadow: 2px 2px 8px #000;
+  display: flex;
+  overflow-x: auto;
+}
   
-  .explore-feed {
-    width: 90vw;
-    height: fit-content;
-    background-color: red;
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-  }
+.explore-feed {
+  width: 90vw;
+  height: fit-content;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
   
-  .explore-post-img {
-    width: 100%;
-    overflow: hidden;
-  }
+.explore-post-img {
+  width: 25dvw;
+  height: 25dvw;
+  margin: 2%;
+}
+.explore-post-img img{
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
   
-  .explore-post-post {
-    width: 100%;
-    height: 30dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: antiquewhite;
-    width: 20dvw;
-    font-size: larger; 
-    text-align: center;
-  }
+.explore-post-post {
+  width: 25dvw;
+  height: 25dvw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: antiquewhite;
+  width: 20dvw;
+  margin: 2%;
+  cursor: pointer;
+}
+.explore-post-post{
+  font-size: 1.5em; 
+  text-align: center;
+  padding: 2%;
+}
 .explore-section-tag{
     width: fit-content;
     height: fit-content;
