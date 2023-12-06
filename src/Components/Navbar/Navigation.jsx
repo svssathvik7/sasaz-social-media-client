@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react'
 import icon1 from "../../assets/Favicon.png";
 import profile from '../../assets/image.png';
 import Logo from './Logo';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navigation.css';
+import TokenValidity from '../Authentication/TokenValidityUtility';
 const Navigation = (props) => {
+    const navigate = useNavigate();
     const location = useLocation();
     const [mobile, setMobile] = useState(false);
     const [path, setPath] = useState('/auth');
     useEffect(() => {
+        TokenValidity().then((res) => {
+            if (!res) {
+                navigate('/auth');
+            }
+        });
         setPath(location.pathname);
         const windowSize = window.innerWidth;
         if (windowSize < 992) {
@@ -28,7 +35,10 @@ const Navigation = (props) => {
                                 <li><Link className='navlinks' to="/search">Search</Link></li>
                                 <li><Link className='navlinks' to="/message">Message Friends</Link></li>
                                 <li><Link className='navlinks' to="/explore">Explore</Link></li>
-                                <li><Link className='navlinks' to="/auth">Log In</Link></li>
+                                <li><Link onClick={() => {
+                                    localStorage.removeItem('token');
+                                    navigate('/auth');
+                                }} className='navlinks' to="/auth">Log Out</Link></li>
                             </ul>
                         }
                     </div>

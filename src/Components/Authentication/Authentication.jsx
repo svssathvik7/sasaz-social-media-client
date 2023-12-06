@@ -3,7 +3,9 @@ import SideImage from '../../assets/AuthSideImage.jpg';
 import './Authentication.css';
 import AuthenticationUtilityForm from './AuthenticationUtilityForm';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Authentication = () => {
+    const navigate = useNavigate();
     const [path, setPath] = useState({
         heading: 'Sign In',
         changeMessage: 'Registered? ',
@@ -42,19 +44,34 @@ const Authentication = () => {
     const Authenticate = async (e) => {
         e.preventDefault();
         const { name } = e.target;
+        let backendData = {
+            email: auth.email,
+            password: auth.password
+        }
         if (name === 'Login') {
-            const backendData = {
-                email: auth.email,
-                password: auth.password
-            }
-            const response = await axios.post('#', { backendData });
+            const response = await axios.post('http://localhost:5001/api/authenticate/userLogin', { backendData });
             const data = await response.data;
-            console.log(data);
+            if (data.user) {
+                localStorage.setItem('token', data.user);
+                navigate("/");
+            }
+            else if (data.status) {
+                changePath();
+            }
+            console.log(data.message);
         }
         else {
-            const response = await axios.post('#', { auth });
+            backendData = {
+                ...backendData,
+                name: auth.name,
+                phNumber: auth.phNumber
+            }
+            const response = await axios.post('http://localhost:5001/api/authenticate/newRegistration', { backendData });
             const data = await response.data;
-            console.log(data);
+            if (data.status) {
+                changePath();
+            }
+            console.log(data.message);
         }
     }
     useEffect(() => {
@@ -62,7 +79,7 @@ const Authentication = () => {
         if (windowSize < 992) {
             setMobile(true);
         }
-    }, []);
+    }, [path]);
     return (
         <div id='authentication-main'>
             <div id='authentication-dynamics'>
