@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import Navigation from './Components/Navbar/Navigation';
 import MiniNavigation from './Components/Navbar/MiniNavigation';
 import Authentication from './Components/Authentication/Authentication';
+import UserContext from './Components/Contexts/UserContext';
 function App() {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -23,16 +24,18 @@ function App() {
   }
   return (
     <div className="App">
-      <Navigation handleOnlineFriends={handleOnlineFriends} />
-      <Routes>
-        <Route path='/' exact Component={Home} />
-        <Route path='/auth' exact Component={Authentication} />
-        <Route path='/search' exact Component={Search} />
-        <Route path='/explore' exact Component={Explore} />
-        <Route path='/message' exact Component={Message} />
-        <Route path='/profile' exact Component={Profile} />
-      </Routes>
-      {mobile && <MiniNavigation />}
+      <UserContext>
+        <Navigation handleOnlineFriends={handleOnlineFriends} />
+        <Routes>
+          <Route path='/' exact Component={Home} />
+          <Route path='/auth' exact Component={Authentication} />
+          <Route path='/search' exact Component={Search} />
+          <Route path='/explore' exact Component={Explore} />
+          <Route path='/message' exact Component={Message} />
+          <Route path='/profile' exact Component={Profile} />
+        </Routes>
+        {mobile && <MiniNavigation />}
+      </UserContext>
     </div>
   );
 }

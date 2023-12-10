@@ -12,7 +12,7 @@ const ProfileSideBar = (props) => {
             <ul>
                 <button id='1' onClick={props.changeFunction}>Details</button>
                 <button id='2' onClick={props.changeFunction}>Posts</button>
-                <button id='3' onClick={props.changeFunction}>Edhokati</button>
+                <button id='3' onClick={props.changeFunction}>Upload Posts</button>
                 <button id='4' onClick={props.changeFunction}>Log Out</button>
             </ul>
         </div>
