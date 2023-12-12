@@ -11,7 +11,7 @@ const Navigation = (props) => {
     const location = useLocation();
     const [mobile, setMobile] = useState(false);
     const [path, setPath] = useState('/auth');
-    const { getUserDetails } = useContext(userContextProvider);
+    const { user,getUserDetails } = useContext(userContextProvider);
     useEffect(() => {
         TokenValidity().then((res) => {
             if (!res) {
@@ -46,7 +46,7 @@ const Navigation = (props) => {
                             </ul>
                         }
                     </div>
-                    <Logo func={props.handleOnlineFriends} src={profile} id='profile' />
+                    <Logo func={props.handleOnlineFriends} src={user&&user.dp ? user.dp : profile} id='profile' />
                 </nav>}
         </div>
     )
