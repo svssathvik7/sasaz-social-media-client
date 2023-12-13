@@ -3,7 +3,7 @@ import Navigation from "../Navbar/Navigation";
 import Feed from '../Feed/Feed';
 import OnlineFiends from '../OnlineFriends/OnlineFriends';
 import postConstants from '../../Constants/PostConstants';
-import MiniNavigation from '../Navbar/MiniNavigation';
+import MiniNavigation from '../Navbar/M..iniNavigation';
 import MiniOnlineFriends from '../OnlineFriends/MiniOnlineFriends';
 import './Home.css';
 const Home = () => {
