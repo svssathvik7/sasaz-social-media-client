@@ -104,7 +104,7 @@
     padding: 2%;
 }
 
-#profile-feed-main #profile-navigation{
+#profile-feed-main #profile-navigation {
     display: flex;
     width: fit-content;
     position: fixed;
@@ -116,7 +116,7 @@
     padding: 2%;
 }
 
-#profile-feed-main #profile-navigation ul{
+#profile-feed-main #profile-navigation ul {
     font-size: min(3.5vw, 1em);
     display: flex;
     gap: 4vw;
@@ -133,4 +133,38 @@
 
 #profile-feed-main #profile-navigation ul li {
     list-style-type: none;
+}
+
+/* PROFILE FEED POST UPLOAD STYLING */
+#profile-feed-post {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#profile-feed-post form {
+    padding: 2em;
+    background-color: #e7e7e7;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    gap: 2em;
+}
+
+#profile-feed-post form input,
+#profile-feed-post form button {
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+#profile-feed-post form button {
+    background-color: rgb(39, 37, 37);
+    color: white;
+}
+
+#profile-feed-post form select {
+    padding: 13px 15px;
 }
