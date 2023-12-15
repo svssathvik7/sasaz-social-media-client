@@ -16,6 +16,25 @@ const ProfileFeedUpload = (props) => {
             return { ...prev, [name]: value }
         });
     }
+    const postImage = async (e) => {
+        const postImage = e.target.files[0];
+        const data = new FormData();
+        data.append("file", postImage);
+        data.append("upload_preset", "socialApp");
+        data.append("cloud_name", "dulewl8s5");
+        fetch("https://api.cloudinary.com/v1_1/dulewl8s5/image/upload", {
+            method: "post",
+            body: data,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setPost((prevValue) => {
+                    return { ...prevValue, imageurl: data.url.toString() };
+                })
+            }).catch((err) => {
+                console.log("Error Occured", err);
+            });
+    };
     const uploadPost = async (e) => {
         e.preventDefault();
         const response = await axios.post('http://localhost:5001/api/user/userPost', { ...post, email: user.email });
@@ -25,7 +44,7 @@ const ProfileFeedUpload = (props) => {
     return (
         <div id='profile-feed-post'>
             <form onSubmit={uploadPost}>
-                <input onChange={changePost} name='imageurl' type="file" required />
+                <input onChange={postImage} name='imageurl' type="file" required />
                 <input onChange={changePost} type="text" placeholder='Enter Caption' required name='caption' />
                 <select onChange={changePost} name="category" id="category">
                     <option name='category' value="select">Choose Category</option>

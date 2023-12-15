@@ -17,7 +17,10 @@ const UserContext = ({ children }) => {
             setUsers({
                 name: data.userDetails.name,
                 email: data.userDetails.email,
-                phNumber: data.userDetails.phNumber
+                phNumber: data.userDetails.phNumber,
+                posts: data.userDetails.posts,
+                friends: data.userDetails.friends,
+                dp: data.userDetails.dp
             });
         }
     }

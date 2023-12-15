@@ -27,7 +27,7 @@ const Feed = (props) => {
             id='feed-post'>
             <div id='post-meta'>
                 <div id='post-meta-user-details'>
-                    <img id='post-dp' alt='dp' src={props.data.dp} />
+                    <img id='post-dp' alt='dp' src={props.dp} />
                     <h6 id='post-user'>{props.data.username}</h6>
                 </div>
                 <div className='font-awesome-icon'>
@@ -35,7 +35,7 @@ const Feed = (props) => {
                 </div>
             </div>
             <div id='post'>
-                {props.data.type === "tweet" ? <h4>{props.data.post}</h4> : <img alt='post' src={props.data.post} />}
+                {props.data.type === "tweet" ? <h4>{props.data.imageUrl}</h4> : <img alt='post' src={props.data.imageUrl} />}
             </div>
             <div id='post-metrics'>
                 <div id='metrics'>
