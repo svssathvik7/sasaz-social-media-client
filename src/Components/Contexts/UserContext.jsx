@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 export const userContextProvider = React.createContext(null);
 const UserContext = ({ children }) => {
     const [user, setUsers] = useState(null)
     const changeUserDetails = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target;   
         setUsers((prevValue) => {
             return { ...prevValue, [name]: value }
         });
     }
+    useEffect(()=>{console.log(user)},[]);
     const getUserDetails = async () => {
         if (user === null) {
             const token = localStorage.getItem('token');
             const response = await axios.post("http://localhost:5001/api/user/getUserDetails", { token });
-            const data = response.data;
+            const data = await response.data;
             setUsers({
                 name: data.userDetails.name,
                 email: data.userDetails.email,
@@ -23,6 +24,7 @@ const UserContext = ({ children }) => {
                 dp: data.userDetails.dp
             });
         }
+
     }
     return (
         <userContextProvider.Provider value={{ user, setUsers, changeUserDetails, getUserDetails }}>

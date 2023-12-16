@@ -6,12 +6,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navigation.css';
 import TokenValidity from '../Authentication/TokenValidityUtility';
 import { userContextProvider } from '../Contexts/UserContext';
+import { userPostsContext } from '../Contexts/UserPostContext';
 const Navigation = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [mobile, setMobile] = useState(false);
     const [path, setPath] = useState('/auth');
     const { user, getUserDetails } = useContext(userContextProvider);
+    const {getUserPosts} = useContext(userPostsContext);
     useEffect(() => {
         TokenValidity().then((res) => {
             if (!res) {
@@ -19,6 +21,7 @@ const Navigation = (props) => {
             }
             else {
                 getUserDetails();
+                getUserPosts();
             }
         });
         setPath(location.pathname);

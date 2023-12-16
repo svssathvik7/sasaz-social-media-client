@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileSideBar from './ProfileSideBar';
 import './Profile.css';
 import ProfileEdit from './ProfileEdit';

@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Feed from '../Feed/Feed'
-import postConstants from '../../Constants/PostConstants'
 import { Link } from 'react-router-dom'
 import { userContextProvider } from '../Contexts/UserContext'
-
+import { userPostsContext } from '../Contexts/UserPostContext'
 const ProfileFeed = () => {
     const { user } = useContext(userContextProvider);
+    const {posts} = useContext(userPostsContext);
     return (
         <div id='profile-feed-main'>
-            {user && user.posts && user.posts.map((post, ind) => (
+            {posts.map((post, ind) => (
                 <div key={ind}>
-                    <Feed data={post} dp={user.dp} />
+                    <Feed data={post} dp={user ? user.dp : "#"} username={user ? user.name : "User"}/>
                 </div>
             ))}
             <nav id='profile-navigation'>

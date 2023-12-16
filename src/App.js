@@ -10,6 +10,7 @@ import Navigation from './Components/Navbar/Navigation';
 import MiniNavigation from './Components/Navbar/MiniNavigation';
 import Authentication from './Components/Authentication/Authentication';
 import UserContext from './Components/Contexts/UserContext';
+import UserPostContext from './Components/Contexts/UserPostContext';
 function App() {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -25,16 +26,18 @@ function App() {
   return (
     <div className="App">
       <UserContext>
-        <Navigation handleOnlineFriends={handleOnlineFriends} />
-        <Routes>
-          <Route path='/' exact Component={Home} />
-          <Route path='/auth' exact Component={Authentication} />
-          <Route path='/search' exact Component={Search} />
-          <Route path='/explore' exact Component={Explore} />
-          <Route path='/message' exact Component={Message} />
-          <Route path='/profile' exact Component={Profile} />
-        </Routes>
-        {mobile && <MiniNavigation />}
+        <UserPostContext>
+          <Navigation handleOnlineFriends={handleOnlineFriends} />
+          <Routes>
+            <Route path='/' exact Component={Home} />
+            <Route path='/auth' exact Component={Authentication} />
+            <Route path='/search' exact Component={Search} />
+            <Route path='/explore' exact Component={Explore} />
+            <Route path='/message' exact Component={Message} />
+            <Route path='/profile' exact Component={Profile} />
+          </Routes>
+          {mobile && <MiniNavigation />}
+        </UserPostContext>
       </UserContext>
     </div>
   );
