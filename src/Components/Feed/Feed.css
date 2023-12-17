@@ -134,3 +134,33 @@
         gap: 1.5%;
     }
 }
+
+/* COMMENT BLOCK STYLING */
+#comment-block {
+    width: 100%;
+    position: relative;
+    height: 2.5em;
+    transform: translateY(-2.5em);
+    display: none;
+    transition: 0.5s linear;
+}
+
+.comment-block-active {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(0em) !important;
+    transition: .5s linear;
+}
+
+#comment-block input {
+    flex: 1 1;
+    height: 100%;
+}
+
+#comment-block button {
+    height: 100%;
+    background-color: rgb(28, 26, 26);
+    color: white;
+    padding: 0em 1em;
+}
