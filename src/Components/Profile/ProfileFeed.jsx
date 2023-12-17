@@ -5,12 +5,12 @@ import { userContextProvider } from '../Contexts/UserContext'
 import { userPostsContext } from '../Contexts/UserPostContext'
 const ProfileFeed = () => {
     const { user } = useContext(userContextProvider);
-    const {posts} = useContext(userPostsContext);
+    // const {posts} = useContext(userPostsContext);
     return (
         <div id='profile-feed-main'>
-            {posts.map((post, ind) => (
+            {user && user.posts && user.posts.map((post, ind) => (
                 <div key={ind}>
-                    <Feed data={post} dp={user ? user.dp : "#"} username={user ? user.name : "User"}/>
+                    <Feed data={post} dp={user ? user.dp : "#"} username={user ? user.name : "User"} />
                 </div>
             ))}
             <nav id='profile-navigation'>

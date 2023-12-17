@@ -10,7 +10,9 @@ import { userContextProvider } from '../Contexts/UserContext';
 const Home = () => {
   const { user } = useContext(userContextProvider);
   const [mobile, setMobile] = useState(false);
+  const { getUserDetails } = useContext(userContextProvider);
   useEffect(() => {
+    getUserDetails();
     const windowSize = window.innerWidth;
     if (windowSize < 992) {
       setMobile(true);
