@@ -11,11 +11,14 @@ const Navigation = (props) => {
     const location = useLocation();
     const [mobile, setMobile] = useState(false);
     const [path, setPath] = useState('/auth');
-    const { user } = useContext(userContextProvider);
+    const { user, getUserDetails } = useContext(userContextProvider);
     useEffect(() => {
         TokenValidity().then((res) => {
             if (!res) {
                 navigate('/auth');
+            }
+            else {
+                getUserDetails();
             }
         });
         setPath(location.pathname);
