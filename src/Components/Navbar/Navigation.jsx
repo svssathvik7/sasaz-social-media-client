@@ -6,22 +6,16 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navigation.css';
 import TokenValidity from '../Authentication/TokenValidityUtility';
 import { userContextProvider } from '../Contexts/UserContext';
-import { userPostsContext } from '../Contexts/UserPostContext';
 const Navigation = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [mobile, setMobile] = useState(false);
     const [path, setPath] = useState('/auth');
-    const { user, getUserDetails } = useContext(userContextProvider);
-    const {getUserPosts} = useContext(userPostsContext);
+    const { user } = useContext(userContextProvider);
     useEffect(() => {
         TokenValidity().then((res) => {
             if (!res) {
                 navigate('/auth');
-            }
-            else {
-                getUserDetails();
-                getUserPosts();
             }
         });
         setPath(location.pathname);
@@ -43,10 +37,10 @@ const Navigation = (props) => {
                                 <li><Link className='navlinks' to="/search">Search</Link></li>
                                 <li><Link className='navlinks' to="/message">Message Friends</Link></li>
                                 <li><Link className='navlinks' to="/explore">Explore</Link></li>
-                                <li><Link onClick={() => {
+                                <li><a onClick={() => {
                                     localStorage.removeItem('token');
                                     navigate('/auth');
-                                }} className='navlinks' to="/auth">Log Out</Link></li>
+                                }} className='navlinks' to="/auth">Log Out</a></li>
                             </ul>
                         }
                     </div>
