@@ -3,8 +3,13 @@ import SideImage from '../../assets/AuthSideImage.jpg';
 import './Authentication.css';
 import AuthenticationUtilityForm from './AuthenticationUtilityForm';
 import axios from 'axios';
+import { useContext } from 'react';
+import { userContextProvider } from '../Contexts/UserContext';
+import {userPostsContext} from '../Contexts/UserPostContext';
 import { useNavigate } from 'react-router-dom';
 const Authentication = () => {
+    const {getUserDetails} = useContext(userContextProvider);
+    const {getUserPosts} = useContext(userPostsContext);
     const navigate = useNavigate();
     const [path, setPath] = useState({
         heading: 'Sign In',
@@ -53,6 +58,8 @@ const Authentication = () => {
             const data = await response.data;
             if (data.user) {
                 localStorage.setItem('token', data.user);
+                getUserDetails();
+                getUserPosts();
                 navigate("/");
             }
             else if (data.status) {

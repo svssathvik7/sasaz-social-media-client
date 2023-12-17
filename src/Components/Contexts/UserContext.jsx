@@ -9,7 +9,6 @@ const UserContext = ({ children }) => {
             return { ...prevValue, [name]: value }
         });
     }
-    useEffect(()=>{console.log(user)},[]);
     const getUserDetails = async () => {
         if (user === null) {
             const token = localStorage.getItem('token');
@@ -24,7 +23,6 @@ const UserContext = ({ children }) => {
                 dp: data.userDetails.dp
             });
         }
-
     }
     return (
         <userContextProvider.Provider value={{ user, setUsers, changeUserDetails, getUserDetails }}>
