@@ -5,7 +5,6 @@ import { userContextProvider } from '../Contexts/UserContext'
 import { userPostsContext } from '../Contexts/UserPostContext'
 const ProfileFeed = () => {
     const { user } = useContext(userContextProvider);
-    // const {posts} = useContext(userPostsContext);
     return (
         <div id='profile-feed-main'>
             {user && user.posts && user.posts.map((post, ind) => (
