@@ -11,16 +11,41 @@ import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
 const Feed = (props) => {
     const ref = useRef(null);
+    const commentRef = useRef(null);
     const { user: { name, email } } = useContext(userContextProvider);
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
-    const [likes, setLikes] = useState(0);
+    const [likes, setLikes] = useState({
+        alter: true,
+        like: props.data.likes
+    });
     const isInView = useInView(ref, {
         once: false
     });
     const changeCommentInput = (e) => {
         const { value } = e.target;
         setComment(value);
+    }
+    const likePost = async (e) => {
+        try {
+            const alter = likes.alter;
+            if (likes.alter === true) {
+                setLikes((prevValue) => {
+                    return { alter: false, like: prevValue.like + 1 }
+                })
+            }
+            else {
+                setLikes((prevValue) => {
+                    return { alter: true, like: prevValue.like - 1 }
+                });
+            }
+            const response = await axios.post("http://localhost:5001/api/user/likes", { alter: alter, pId: props.data._id });
+            const data = response.data;
+            console.log(data);
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
     const postComment = async (e) => {
         e.preventDefault();
@@ -33,7 +58,7 @@ const Feed = (props) => {
         }
     }
     const toggleComment = () => {
-        const element = document.querySelector("#comment-block");
+        const element = commentRef.current;
         if (element.classList.contains('comment-block-active')) {
             element.classList.remove("comment-block-active");
         }
@@ -67,10 +92,8 @@ const Feed = (props) => {
             <div id='post-metrics'>
                 <div id='metrics'>
                     <div className='font-awesome-metric-icon'>
-                        <FontAwesomeIcon onClick={() => {
-                            setLikes(likes + 1);
-                        }} icon={faThumbsUp} />
-                        <p>{likes}</p>
+                        <FontAwesomeIcon onClick={likePost} icon={faThumbsUp} />
+                        <p>{likes.like}</p>
                     </div>
                     <div className='font-awesome-metric-icon'>
                         <FontAwesomeIcon onClick={toggleComment} icon={faComment} />
@@ -85,10 +108,18 @@ const Feed = (props) => {
                     }} icon={faHeart} style={{ color: heart ? 'red' : 'black' }} />
                 </div>
             </div>
-            <form onSubmit={postComment} id="comment-block">
-                <input type="text" placeholder='Enter Comment' onChange={changeCommentInput} />
-                <button type='submit'>Comment</button>
-            </form>
+            <div id='comment-block' ref={commentRef}>
+                {props.data.comments && props.data.comments.map((comment, ind) => {
+                    return <div key={ind} className='comment-data'>
+                        <h4>{comment.userCommented} : </h4>
+                        <p>{comment.comment}</p>
+                    </div>
+                })}
+                <form onSubmit={postComment}>
+                    <input type="text" placeholder='Enter Comment' onChange={changeCommentInput} />
+                    <button type='submit'>Comment</button>
+                </form>
+            </div>
         </motion.div>
     )
 }

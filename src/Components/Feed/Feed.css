@@ -137,25 +137,50 @@
 
 /* COMMENT BLOCK STYLING */
 #comment-block {
+    flex-direction: column;
     width: 100%;
     position: relative;
-    height: 2.5em;
+    height: fit-content;
+    max-height: 10em;
+    overflow: scroll;
     transform: translateY(-2.5em);
     display: none;
     transition: 0.5s linear;
 }
 
+#comment-block form {
+    height: 2.5em;
+    width: 100%;
+}
+
+#comment-block .comment-data {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 15px;
+}
+
+#comment-block .comment-data p {
+    margin-left: 2.5em;
+}
+
 .comment-block-active {
     display: flex !important;
-    align-items: center;
-    justify-content: space-between;
     transform: translateY(0em) !important;
     transition: .5s linear;
 }
 
+.comment-block-active form {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+}
+
 #comment-block input {
     flex: 1 1;
-    height: 100%;
+    height: 2.7em;
 }
 
 #comment-block button {
