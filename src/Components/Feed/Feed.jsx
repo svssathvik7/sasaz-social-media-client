@@ -16,7 +16,7 @@ const Feed = (props) => {
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
     const [likes, setLikes] = useState({
-        alter: true,
+        alter: false,
         like: props.data.likes
     });
     const isInView = useInView(ref, {
@@ -28,7 +28,7 @@ const Feed = (props) => {
     }
     const likePost = async (e) => {
         try {
-            const alter = likes.alter;
+            const alter = !likes.alter;
             if (likes.alter === true) {
                 setLikes((prevValue) => {
                     return { alter: false, like: prevValue.like + 1 }
