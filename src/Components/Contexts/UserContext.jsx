@@ -22,6 +22,7 @@ const UserContext = ({ children }) => {
             dp: data.userDetails.dp
         });
     }
+    console.log(user);
     return (
         <userContextProvider.Provider value={{ user, setUsers, changeUserDetails, getUserDetails }}>
             {children}

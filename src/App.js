@@ -11,6 +11,7 @@ import MiniNavigation from './Components/Navbar/MiniNavigation';
 import Authentication from './Components/Authentication/Authentication';
 import UserContext from './Components/Contexts/UserContext';
 import UserPostContext from './Components/Contexts/UserPostContext';
+import TotalUsersContext from './Components/Contexts/TotalUsersContext';
 function App() {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -31,7 +32,7 @@ function App() {
           <Routes>
             <Route path='/' exact Component={Home} />
             <Route path='/auth' exact Component={Authentication} />
-            <Route path='/search' exact Component={Search} />
+            <Route path='/search' exact element={<TotalUsersContext><Search /></TotalUsersContext>} />
             <Route path='/explore' exact Component={Explore} />
             <Route path='/message' exact Component={Message} />
             <Route path='/profile' exact Component={Profile} />
