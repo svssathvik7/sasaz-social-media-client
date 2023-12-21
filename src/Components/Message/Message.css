@@ -1,0 +1,64 @@
+#message-page {
+    display: flex;
+    position: relative;
+}
+
+#messaging-block {
+    display: flex;
+    flex: 1 1;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 2em;
+    align-items: center;
+}
+
+#profile-box {
+    display: flex;
+    width: 100%;
+    padding: 0em 2em;
+    align-items: center;
+    padding-top: 2em;
+    gap: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+}
+
+#profile-box img {
+    width: 2em;
+}
+
+#messaging-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+#input-message-box {
+    width: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#input-message-box svg {
+    font-size: 2.5em;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+#input-message-box input {
+    padding: 1em 30em 1em 1em;
+    background-color: rgb(231, 231, 231);
+    border: 0;
+    border-radius: 2px;
+}
+
+#input-message-box button {
+    padding: 1em;
+    border: 0;
+    background-color: rgb(48, 45, 45);
+    color: white;
+}
