@@ -12,14 +12,12 @@ const SearchUser = (props) => {
             e.preventDefault();
                 try {
                     if (data && data.email) {
-                        const response = await axios.post('http://localhost:5001/api/user/addfrnds', {
+                        const response = await axios.post('http://localhost:5001/api/user/managefrnds', {
                             pId: props.data._id,
                             email:user.email,
                             frndEmail: data.email
                         });
-            
                         console.log(response.data);
-            
                         if (response.data && response.data.status) {
                             setFrnd("Remove Friend");
                         }
@@ -31,13 +29,11 @@ const SearchUser = (props) => {
         else{
             try {
                 if (data && data.email) {
-                    const response = await axios.post('http://localhost:5001/api/user/removefrnds', {
+                    const response = await axios.post('http://localhost:5001/api/user/managefrnds', {
                         pId: props.data._id,
                         email : user.email
                     });
-        
                     console.log(response.data);
-        
                     if (response.data && response.data.status) {
                         setFrnd("Add Friend");
                     }

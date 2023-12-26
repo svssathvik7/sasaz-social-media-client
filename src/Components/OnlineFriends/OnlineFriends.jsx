@@ -8,7 +8,7 @@ export default function OnlineFriends() {
   const [friends, setFriends] = useState([]);
     useEffect(() => {
       if (user && user.email) { 
-        axios.post('http://localhost:5001/api/user/getallfrnds', { email: user.email })
+        axios.post('http://localhost:5001/api/user/managefrnds', { email: user.email })
           .then(response => {
             if (response.data.status) {
               
