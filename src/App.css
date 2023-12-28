@@ -8,3 +8,9 @@
 body {
   overflow-x: hidden;
 }
+
+button,
+Link,
+a {
+  cursor: pointer;
+}

@@ -9,7 +9,18 @@ import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
+import ProfileSideBar from '../Profile/ProfileSideBar';
 const Feed = (props) => {
+    const [post, setPost] = useState({
+        _id: props.data._id,
+        type: props.type || 'post',
+        dp: props.dp,
+        username: props.data.userName,
+        imageUrl: props.data.imageUrl,
+        comments: props.data.comments,
+        likes: props.data.likes,
+        alter: true
+    });
     const ref = useRef(null);
     const commentRef = useRef(null);
     const { user: { name, email } } = useContext(userContextProvider);
@@ -28,18 +39,13 @@ const Feed = (props) => {
     }
     const likePost = async (e) => {
         try {
-            const alter = likes.alter;
-            if (likes.alter === true) {
-                setLikes((prevValue) => {
-                    return { alter: false, like: prevValue.like + 1 }
-                })
-            }
-            else {
-                setLikes((prevValue) => {
-                    return { alter: true, like: prevValue.like - 1 }
-                });
-            }
-            const response = await axios.post("http://localhost:5001/api/user/likes", { alter: alter, pId: props.data._id });
+            const alter = post.alter;
+            const resultAlter = !(post.alter);
+            const resultLikes = post.alter === false ? post.likes - 1 : post.likes + 1;
+            setPost((prevValue) => {
+                return { ...prevValue, alter: resultAlter, likes: resultLikes }
+            })
+            const response = await axios.post("http://localhost:5001/api/user/likes", { alter: alter, pId: post._id });
             const data = response.data;
             console.log(data);
         }
@@ -50,9 +56,13 @@ const Feed = (props) => {
     const postComment = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/user/comment', { pId: props.data._id, comment, name, email });
+            const response = await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email });
             const data = response.data;
-            console.log(data.message);
+            setPost((prevValue) => {
+                return { ...prevValue, comments: [...prevValue.comments, { comment: comment, userCommented: name }] }
+            })
+            setComment("");
+            toggleComment();
         } catch (error) {
             console.log(error);
         }
@@ -79,21 +89,21 @@ const Feed = (props) => {
             id='feed-post'>
             <div id='post-meta'>
                 <div id='post-meta-user-details'>
-                    <img id='post-dp' alt='dp' src={props.dp} />
-                    <h6 id='post-user'>{props.username}</h6>
+                    <img id='post-dp' alt='dp' src={post.dp} />
+                    <h6 id='post-user'>{post.username}</h6>
                 </div>
                 <div className='font-awesome-icon'>
                     <FontAwesomeIcon icon={faBars} />
                 </div>
             </div>
             <div id='post'>
-                {props.data.type === "tweet" ? <h4>{props.data.imageUrl}</h4> : <img alt='post' src={props.data.imageUrl} />}
+                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl} />}
             </div>
             <div id='post-metrics'>
                 <div id='metrics'>
                     <div className='font-awesome-metric-icon'>
                         <FontAwesomeIcon onClick={likePost} icon={faThumbsUp} />
-                        <p>{likes.like}</p>
+                        <p>{post.likes}</p>
                     </div>
                     <div className='font-awesome-metric-icon'>
                         <FontAwesomeIcon onClick={toggleComment} icon={faComment} />
@@ -109,14 +119,14 @@ const Feed = (props) => {
                 </div>
             </div>
             <div id='comment-block' ref={commentRef}>
-                {props.data.comments && props.data.comments.map((comment, ind) => {
+                {post.comments && post.comments.map((comment, ind) => {
                     return <div key={ind} className='comment-data'>
                         <h4>{comment.userCommented} : </h4>
                         <p>{comment.comment}</p>
                     </div>
                 })}
                 <form onSubmit={postComment}>
-                    <input type="text" placeholder='Enter Comment' onChange={changeCommentInput} />
+                    <input type="text" placeholder='Enter Comment' value={comment} onChange={changeCommentInput} />
                     <button type='submit'>Comment</button>
                 </form>
             </div>
