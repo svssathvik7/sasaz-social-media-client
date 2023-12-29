@@ -18,7 +18,6 @@ const Feed = (props) => {
         imageUrl: props.data.imageUrl,
         comments: props.data.comments,
         likes: props.data.likes,
-        usersLiked: props.data.usersLiked
     });
     const ref = useRef(null);
     const commentRef = useRef(null);
