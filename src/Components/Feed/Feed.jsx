@@ -9,7 +9,6 @@ import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
-import ProfileSideBar from '../Profile/ProfileSideBar';
 const Feed = (props) => {
     const [post, setPost] = useState({
         _id: props.data._id,
@@ -19,17 +18,13 @@ const Feed = (props) => {
         imageUrl: props.data.imageUrl,
         comments: props.data.comments,
         likes: props.data.likes,
-        alter: true
+        usersLiked: props.data.usersLiked
     });
     const ref = useRef(null);
     const commentRef = useRef(null);
     const { user: { name, email } } = useContext(userContextProvider);
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
-    const [likes, setLikes] = useState({
-        alter: false,
-        like: props.data.likes
-    });
     const isInView = useInView(ref, {
         once: false
     });
@@ -39,15 +34,11 @@ const Feed = (props) => {
     }
     const likePost = async (e) => {
         try {
-            const alter = post.alter;
-            const resultAlter = !(post.alter);
-            const resultLikes = post.alter === false ? post.likes - 1 : post.likes + 1;
-            setPost((prevValue) => {
-                return { ...prevValue, alter: resultAlter, likes: resultLikes }
-            })
-            const response = await axios.post("http://localhost:5001/api/user/likes", { alter: alter, pId: post._id });
+            const response = await axios.post("http://localhost:5001/api/user/likes", { pId: post._id, email: email });
             const data = response.data;
-            console.log(data);
+            setPost((prevValue) => {
+                return { ...prevValue, likes: data.likes }
+            })
         }
         catch (err) {
             console.log(err);
@@ -56,8 +47,7 @@ const Feed = (props) => {
     const postComment = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email });
-            const data = response.data;
+            await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email });
             setPost((prevValue) => {
                 return { ...prevValue, comments: [...prevValue.comments, { comment: comment, userCommented: name }] }
             })

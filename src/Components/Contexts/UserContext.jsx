@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 export const userContextProvider = React.createContext(null);
 const UserContext = ({ children }) => {
@@ -22,7 +22,6 @@ const UserContext = ({ children }) => {
             dp: data.userDetails.dp
         });
     }
-    console.log(user);
     return (
         <userContextProvider.Provider value={{ user, setUsers, changeUserDetails, getUserDetails }}>
             {children}
