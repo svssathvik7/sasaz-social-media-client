@@ -13,7 +13,6 @@ const SearchUser = (props) => {
             if (data && data.email) {
                 const response = await axios.post('http://localhost:5001/api/user/managefrnds', {
                     fId: props.data._id,
-                    frndEmail: data.email,
                     email: user.email
                 });
                 const d = response.data;
