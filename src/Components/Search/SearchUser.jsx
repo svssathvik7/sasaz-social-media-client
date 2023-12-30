@@ -1,49 +1,57 @@
-import React, { useState, useContext,useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import './Search.css';
 import { userContextProvider } from '../Contexts/UserContext';
 
 const SearchUser = (props) => {
     const { data } = props;
-    const { user } = useContext(userContextProvider);
+    const { user, setUsers } = useContext(userContextProvider);
     const [frnd, setFrnd] = useState("Add Friend");
     const addFriend = async (e) => {
-        if (frnd === "Add Friend"){
-            e.preventDefault();
-                try {
-                    if (data && data.email) {
-                        const response = await axios.post('http://localhost:5001/api/user/managefrnds', {
-                            pId: props.data._id,
-                            email:user.email,
-                            frndEmail: data.email
-                        });
-                        console.log(response.data);
-                        if (response.data && response.data.status) {
-                            setFrnd("Remove Friend");
-                        }
-                    } 
-                } catch (error) {
-                    console.log(error);
-                }
-        }
-        else{
-            try {
-                if (data && data.email) {
-                    const response = await axios.post('http://localhost:5001/api/user/managefrnds', {
-                        pId: props.data._id,
-                        email : user.email
-                    });
-                    console.log(response.data);
-                    if (response.data && response.data.status) {
-                        setFrnd("Add Friend");
+        e.preventDefault();
+        try {
+            if (data && data.email) {
+                const response = await axios.post('http://localhost:5001/api/user/managefrnds', {
+                    fId: props.data._id,
+                    frndEmail: data.email,
+                    email: user.email
+                });
+                const d = response.data;
+                if (d.status) {
+                    if (frnd === 'Add Friend') {
+                        setFrnd("Remove Friend");
+                        setUsers((prevValue) => {
+                            return { ...prevValue, friends: [...prevValue.friends, data] };
+                        })
                     }
-                } 
-            } catch (error) {
-                console.log(error);
+                    else {
+                        setFrnd("Add Friend");
+                        const removeFriends = user.friends.filter((ele) => ele.email !== data.email);
+                        console.log(removeFriends);
+                        setUsers((prevValue) => {
+                            return { ...prevValue, friends: [removeFriends] }
+                        });
+                    }
+                }
             }
+        } catch (error) {
+            console.log(error);
         }
     }
-    
+    useEffect(() => {
+        var eitherFrnd = false;
+        user && user.friends.map((ele, ind) => {
+            if (ele.email === data.email) {
+                eitherFrnd = true;
+            }
+        });
+        if (eitherFrnd) {
+            setFrnd("Remove Friend");
+        }
+        else {
+            setFrnd("Add Friend");
+        }
+    }, [])
 
     return (
         <div className='single-user'>

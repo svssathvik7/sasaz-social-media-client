@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { TotalUserContextProvider } from '../Contexts/TotalUsersContext';
 import './Search.css';
 import SearchUser from './SearchUser';
+import { userContextProvider } from '../Contexts/UserContext';
 const Search = () => {
     const { getUsers, users } = useContext(TotalUserContextProvider);
+    const { user } = useContext(userContextProvider);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [search, setSearch] = useState();
     useEffect(() => {
@@ -29,10 +31,14 @@ const Search = () => {
                 <button type='submit'>Search</button>
             </form>
             <div id="search-results">
-                {filteredUsers && filteredUsers.length === 0 ? users && users.users.map((user, ind) => {
-                    return <SearchUser key={ind} data={user} />
-                }) : filteredUsers && filteredUsers === -1 ? <p>No Such Users Found</p> : filteredUsers.map((user, ind) => {
-                    return <SearchUser key={ind} data={user} />
+                {filteredUsers && filteredUsers.length === 0 ? users && users.users.map((ele, ind) => {
+                    if (user && (ele.email !== user.email)) {
+                        return <SearchUser key={ind} data={ele} />
+                    }
+                }) : filteredUsers && filteredUsers === -1 ? <p>No Such Users Found</p> : filteredUsers.map((ele, ind) => {
+                    if (user && (ele.email !== user.email)) {
+                        return <SearchUser key={ind} data={ele} />
+                    }
                 })}
             </div>
         </div>
