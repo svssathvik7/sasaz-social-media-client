@@ -15,7 +15,6 @@ const Home = () => {
     if (windowSize < 992) {
       setMobile(true);
     }
-    console.log(user?.posts??[]);
   }, []);
   const [onlineUsers, setOnlineUsers] = useState(false);
   const handleOnlineFriends = () => {
