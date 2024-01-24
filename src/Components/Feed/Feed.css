@@ -23,6 +23,11 @@
 
 .font-awesome-icon {
     cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #post-user {
@@ -79,6 +84,29 @@
     font-size: 1.5em;
     cursor: pointer;
     text-align: center;
+}
+
+.font-awesome-icon #top-bar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    background: #a2a2a2;
+    border: 1px solid black;
+    position: absolute;
+    left: 3.3em;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.font-awesome-icon #top-bar-section>* {
+    width: 100%;
+    padding: 2px 10px;
+    border-bottom: 1px solid black;
+}
+
+.font-awesome-icon #top-bar-section>*:nth-child(2) {
+    border-bottom: 0px solid black;
 }
 
 .font-awesome-metric-icon p {
