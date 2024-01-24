@@ -71,9 +71,21 @@ const Feed = (props) => {
             return !prevValue
         });
     }
-    // const postThreeLines = () => {
-
-    // }
+    const handlePostDelete = async (e)=>{
+        try {
+            const response = (await axios.post("http://localhost:5001/api/user/deletePost/",{
+                postId : props.data._id
+            })).data;
+            if(response.status){
+                console.log("Successfull deletion!")
+            }
+            else{
+                console.log(response);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <motion.div
             ref={ref}
@@ -94,7 +106,7 @@ const Feed = (props) => {
                     <FontAwesomeIcon onClick={openTopBar} icon={faBars} />
                     {topBar && <div id="top-bar-section">
                         <p>Save</p>
-                        <p>Delete</p>
+                        <p onClick={handlePostDelete}>Delete</p>
                     </div>}
                 </div>
 
