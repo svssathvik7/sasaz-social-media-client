@@ -19,6 +19,7 @@ const Feed = (props) => {
         comments: props.data.comments,
         likes: props.data.likes,
     });
+    const [topBar, setTopBar] = useState(false);
     const ref = useRef(null);
     const commentRef = useRef(null);
     const { user: { name, email } } = useContext(userContextProvider);
@@ -65,6 +66,14 @@ const Feed = (props) => {
             element.classList.add("comment-block-active");
         }
     }
+    const openTopBar = () => {
+        setTopBar((prevValue) => {
+            return !prevValue
+        });
+    }
+    // const postThreeLines = () => {
+
+    // }
     return (
         <motion.div
             ref={ref}
@@ -82,8 +91,13 @@ const Feed = (props) => {
                     <h6 id='post-user'>{post.userName}</h6>
                 </div>
                 <div className='font-awesome-icon'>
-                    <FontAwesomeIcon icon={faBars} />
+                    <FontAwesomeIcon onClick={openTopBar} icon={faBars} />
+                    {topBar && <div id="top-bar-section">
+                        <p>Save</p>
+                        <p>Delete</p>
+                    </div>}
                 </div>
+
             </div>
             <div id='post'>
                 {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl} />}
