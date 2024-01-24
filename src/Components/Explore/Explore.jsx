@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Explore.css';
 import exploreConstants from '../../Constants/exploreConstants';
+import axios from 'axios';
 
 const Explore = () => {
+  const [explorePage, setExplorePage] = useState();
+  const searchExplorePageContent = async () => {
+    const response = await axios.get('http://localhost:5001/api/user/exploreFeed');
+    const data = response.data;
+    setExplorePage(data.posts);
+  }
+  useEffect(() => {
+    searchExplorePageContent();
+  }, []);
   return (
     <div id='explore-page'>
-      {exploreConstants.map((section) => (
-        <div id='explore-section' key={section.tag}>
-          <h3 className='explore-section-tag'>#{section.tag}</h3>
+      {explorePage && explorePage.map((section) => (
+        <div id='explore-section' key={section[0].category}>
+          <h3 className='explore-section-tag'>#{section[0].category}</h3>
           <div id='explore-posts' className='explore-posts-container'>
-            {section.posts.map((post) => (
-              <div key={post.id} className='explore-feed'>
-                {post.type === 'image' ? (
-                  <div className='explore-post-img'>
-                    <img alt='post-img' src={post.post} />
-                  </div>
-                ) : (
-                  <div className='explore-post-post'>
-                    <h6>{post.post}</h6>
-                  </div>
-                )}
+            {section.map((post) => (
+              <div key={post._id} className='explore-feed'>
+                <div className='explore-post-img'>
+                  <img alt='post-img' src={post.imageUrl} />
+                </div>
               </div>
             ))}
           </div>
