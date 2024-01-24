@@ -8,7 +8,7 @@ async function TokenValidity() {
         }
         const response = await axios.post('http://localhost:5001/api/authenticate/authorize', {}, { headers });
         const data = await response.data;
-        return data.status;
+        return data.status ? data.status : false;
     }
     else {
         return false;

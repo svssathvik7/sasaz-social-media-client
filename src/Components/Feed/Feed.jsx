@@ -78,8 +78,8 @@ const Feed = (props) => {
             id='feed-post'>
             <div id='post-meta'>
                 <div id='post-meta-user-details'>
-                    <img id='post-dp' alt='dp' src={post.dp} />
-                    <h6 id='post-user'>{post.username}</h6>
+                    <img id='post-dp' alt='dp' src={post&&post.userPosted ? post.userPosted.dp : "#"} />
+                    <h6 id='post-user'>{post.userName}</h6>
                 </div>
                 <div className='font-awesome-icon'>
                     <FontAwesomeIcon icon={faBars} />
