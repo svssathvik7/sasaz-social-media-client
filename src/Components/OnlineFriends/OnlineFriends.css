@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 90dvh;
+    height: inherit;
     width: -moz-fit-content;
     width: fit-content;
     padding: 2%;
@@ -11,9 +11,9 @@
 }
 
 #online-friends-scroller {
+    height: 75dvh;
     overflow-y: scroll;
     flex-direction: column;
-    height: 90dvh!important;
     width: -moz-fit-content;
     width: fit-content;
     display: flex;
@@ -41,7 +41,7 @@
     #online-friends {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-evenly;
         height: -moz-fit-content;
         height: fit-content;
@@ -52,11 +52,12 @@
         background-color: rgb(40, 38, 38);
         position: absolute;
         z-index: 10;
-        right: 0;
-        bottom: 5px;
+        right: 0px;
+        bottom: 4.5%;
         animation: grow 0.3s ease;
         scrollbar-width: 0px;
-        border-radius: 1em;
+        border-radius: 10px;
+        gap: 2em;
     }
 
     @keyframes grow {
@@ -74,9 +75,8 @@
     #online-friends-scroller {
         overflow-y: scroll;
         flex-direction: column;
-        max-height: 65dvh;
+        max-height: 55dvh;
         height: -moz-fit-content;
-        height: fit-content;
         width: -moz-fit-content;
         width: fit-content;
         display: flex;

@@ -14,7 +14,6 @@ const Navigation = (props) => {
     const { user, getUserDetails } = useContext(userContextProvider);
     useEffect(() => {
         TokenValidity().then((res) => {
-            console.log(res);
             if (!res) {
                 navigate('/auth');
             }

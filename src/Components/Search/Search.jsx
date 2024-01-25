@@ -30,6 +30,7 @@ const Search = () => {
                 <input type="text" placeholder='Search Account' name='account' onChange={(e) => setSearch(e.target.value)} />
                 <button type='submit'>Search</button>
             </form>
+            <div id="line"></div>
             <div id="search-results">
                 {filteredUsers && filteredUsers.length === 0 ? users && users.users.map((ele, ind) => {
                     if (user && (ele.email !== user.email)) {

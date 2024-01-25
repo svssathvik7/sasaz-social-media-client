@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { motion, useInView } from "framer-motion";
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
 const Feed = (props) => {
-    useEffect(()=>{console.log(props)})
+    console.log(props);
     const [post, setPost] = useState({
         _id: props.data._id,
         type: props.type || 'post',
@@ -72,15 +72,15 @@ const Feed = (props) => {
             return !prevValue
         });
     }
-    const handlePostDelete = async (e)=>{
+    const handlePostDelete = async (e) => {
         try {
-            const response = (await axios.post("http://localhost:5001/api/user/deletePost/",{
-                postId : props.data._id
+            const response = (await axios.post("http://localhost:5001/api/user/deletePost/", {
+                postId: props.data._id
             })).data;
-            if(response.status){
+            if (response.status) {
                 console.log("Successfull deletion!")
             }
-            else{
+            else {
                 console.log(response);
             }
         } catch (error) {
@@ -100,8 +100,8 @@ const Feed = (props) => {
             id='feed-post'>
             <div id='post-meta'>
                 <div id='post-meta-user-details'>
-                    <img id='post-dp' alt='dp' src={props&&props ? props.dp : "#"} />
-                    <h6 id='post-user'>{props.data.userName}</h6>
+                    <img id='post-dp' alt='dp' src={props && props ? props.dp : "#"} />
+                    <h4 id='post-user'>{props.name}</h4>
                 </div>
                 <div className='font-awesome-icon'>
                     <FontAwesomeIcon onClick={openTopBar} icon={faBars} />

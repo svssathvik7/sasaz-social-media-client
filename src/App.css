@@ -14,3 +14,11 @@ Link,
 a {
   cursor: pointer;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
+}

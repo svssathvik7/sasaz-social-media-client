@@ -17,14 +17,13 @@
 
 #profile-sidebar {
     width: -moz-fit-content;
-    width: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     gap: 1.5em;
     padding: 2em;
-    background-color: rgb(54, 53, 53);
+    background-color: rgb(40, 38, 38);
     height: 90dvh;
     color: white;
 }
