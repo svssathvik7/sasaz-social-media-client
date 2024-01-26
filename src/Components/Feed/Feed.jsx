@@ -1,16 +1,17 @@
 import React, { useState, useRef, useContext } from 'react'
 import { motion, useInView } from "framer-motion";
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faReply } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import heartImage from "./heart.webp";
+import replyImage from './5005361.webp';
 import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
 const Feed = (props) => {
-    console.log(props);
     const [post, setPost] = useState({
         _id: props.data._id,
         type: props.type || 'post',
@@ -26,6 +27,11 @@ const Feed = (props) => {
     const { user: { name, email } } = useContext(userContextProvider);
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
+    const [reply, setReply] = useState({
+        actualReply: '',
+        open: false,
+        cId: ''
+    });
     const isInView = useInView(ref, {
         once: false
     });
@@ -33,29 +39,22 @@ const Feed = (props) => {
         const { value } = e.target;
         setComment(value);
     }
+    const changeReplyInput = (e) => {
+        const { value } = e.target;
+        setReply((prevValue) => {
+            return { ...prevValue, actualReply: value }
+        });
+    }
     const likePost = async (e) => {
         try {
             const response = await axios.post("http://localhost:5001/api/user/likes", { pId: post._id, email: email });
             const data = response.data;
             setPost((prevValue) => {
                 return { ...prevValue, likes: data.likes }
-            })
+            });
         }
         catch (err) {
             console.log(err);
-        }
-    }
-    const postComment = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email });
-            setPost((prevValue) => {
-                return { ...prevValue, comments: [...prevValue.comments, { comment: comment, userCommented: name }] }
-            })
-            setComment("");
-            toggleComment();
-        } catch (error) {
-            console.log(error);
         }
     }
     const toggleComment = () => {
@@ -86,6 +85,56 @@ const Feed = (props) => {
         } catch (error) {
             console.log(error);
         }
+    }
+    const likeComment = async (e) => {
+        const commentId = e.target.id;
+        const response = await axios.post("http://localhost:5001/api/user/likes", { pId: post._id, email: email, cId: commentId, comment: true });
+        const data = response.data;
+        console.log(data.message);
+        setPost((prevValue) => {
+            const newComments = prevValue.comments.map((ele) => {
+                if (ele._id === commentId) {
+                    ele = data.likedComment;
+                }
+                return ele;
+            });
+            return { ...prevValue, comments: newComments };
+        });
+    }
+    const postComment = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email });
+            const data = response.data;
+            console.log(data);
+            setPost((prevValue) => {
+                return { ...prevValue, comments: [...prevValue.comments, { comment: comment, userCommented: name, likes: 0, replies: [], usersLiked: [], _id: data.newComment._id }] }
+            })
+            setComment("");
+            toggleComment();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const postReply = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5001/api/user/reply', { pId: post._id, reply: reply.actualReply, cId: reply.cId, email: email });
+            const data = response.data;
+            console.log(data.message);
+            setReply((prev) => {
+                return { ...prev, open: !prev.open, cId: '', reply: '' }
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const openReplyBar = (e) => {
+        const commentId = e.target.id;
+        setReply((prev) => {
+            return { ...prev, open: !prev.open, cId: commentId }
+        });
     }
     return (
         <motion.div
@@ -134,18 +183,36 @@ const Feed = (props) => {
                     }} icon={faHeart} style={{ color: heart ? 'red' : 'black' }} />
                 </div>
             </div>
+
+
             <div id='comment-block' ref={commentRef}>
                 {post.comments && post.comments.map((comment, ind) => {
-                    return <div key={ind} className='comment-data'>
-                        <h4>{comment.userCommented} : </h4>
-                        <p>{comment.comment}</p>
+                    return <div key={ind} className='comment-data-header'>
+                        <div className='comment-data'>
+                            <h4>{comment.userCommented} : </h4>
+                            <p>{comment.comment}</p>
+                        </div>
+                        <div className='comment-response'>
+                            <img id={comment._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
+                            {comment.likes}
+                            <img id={comment._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
+                        </div>
                     </div>
                 })}
-                <form onSubmit={postComment}>
-                    <input type="text" placeholder='Enter Comment' value={comment} onChange={changeCommentInput} />
+                {
+                    reply.open && <form id='reply-form' onSubmit={postReply}>
+                        <input type="text" placeholder='Reply To Comment' required onChange={changeReplyInput} />
+                        <button type='submit'>Reply</button>
+                    </form>
+                }
+                <form id='comment-form' onSubmit={postComment}>
+                    <input type="text" placeholder='Enter Comment' value={comment} required onChange={changeCommentInput} />
                     <button type='submit'>Comment</button>
                 </form>
             </div>
+
+
+
         </motion.div>
     )
 }

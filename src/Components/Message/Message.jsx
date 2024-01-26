@@ -6,6 +6,7 @@ import { userContextProvider } from '../Contexts/UserContext';
 
 const Message = () => {
     const { user } = useContext(userContextProvider);
+    // const { messageFrnd } = useContext(messageFriendProvider);
     return (
         <div id='message-page'>
             <OnlineFriends />

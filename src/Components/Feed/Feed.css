@@ -181,11 +181,22 @@
     width: 100%;
 }
 
+#comment-block .comment-data-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
 #comment-block .comment-data {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 10px 15px;
+}
+
+#comment-block .comment-response {
+    display: flex;
+    gap: 10px;
 }
 
 #comment-block .comment-data p {
@@ -202,8 +213,16 @@
     display: flex !important;
     justify-content: center;
     align-items: center;
+}
+
+.comment-block-active #comment-form {
     position: sticky;
     bottom: 0;
+}
+
+.comment-block-active #reply-form {
+    position: sticky;
+    bottom: 2.2em;
 }
 
 #comment-block input {
@@ -215,5 +234,5 @@
     height: 100%;
     background-color: rgb(28, 26, 26);
     color: white;
-    padding: 0em 1em;
+    width: 7em;
 }
