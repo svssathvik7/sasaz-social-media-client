@@ -7,11 +7,15 @@ export default function Message() {
     const [messages,setMessages] = useState([]);
     const [message,setMessage] = useState('');
     const {user} = useContext(userContextProvider);
+    const [client,setClient] = useState(user);
     const fetchMessages = async ()=>{
         try {
-            const response = (await axios.get("http://localhost:5001/api/chat/messages/")).data;
+            const names = [user.email, client.email].sort();
+            const response = (await axios.post("http://localhost:5001/api/chat/messages/",{
+                chatId : names[0]+names[1]
+            })).data;
             if(response.status){
-                setMessages(response.data);
+                setMessages(response.data.chat);
             }
             else{
                 console.log('Error fetching messages:');
@@ -24,9 +28,11 @@ export default function Message() {
     const sendMessage = async ()=>{
         try {
             // console.log(user);
+            const names = [user.email, client.email].sort();
             const result = await axios.post("http://localhost:5001/api/chat/addMessage/",{
                 user : user._id,
-                message : message
+                message : message,
+                chatId : names[0]+names[1]
             });
             setMessage('');
             fetchMessages();
@@ -38,36 +44,40 @@ export default function Message() {
     useEffect(
         ()=>{
             fetchMessages();
-            const interval = setInterval(() => {
-                fetchMessages();
-            }, 2000);
-            return () => clearInterval(interval);
+            console.log(messages);
         }
-    ,[user])
+    ,[user,messages,message])
   return (
     <div id='chat-container'>
-        <div id='online-friends'>
-            {user && user.friends && user.friends.length !== 0 ? user.friends.map(frnd => (
-                <div key={frnd._id} id='friend-div'>
-                <img alt={"Dp"} src={frnd.dp} style={{ width: '50px', height: '50px' }} />
-                <h4>{frnd.name}</h4>
-                </div>
-            )) : <p style={{ color: 'white' }}>No Friends</p>}
+        <div id="major-chat-container">
+            <div id='friends-container'>
+                {user && user.friends && user.friends.map((frnd,i)=>(
+                    <div key={i} onClick={()=>{setClient(frnd)}} className='frnd-data'>
+                        <img alt='dp' src={frnd?.dp} className='dp'/>
+                        <p>{frnd?.name}</p>
+                    </div>
+                ))}
             </div>
-        <div id="chat">
             <div className='chat-holder'>
-                {messages.map((message,i)=>(
-                    <div className='chat-block' key={i}>
-                        <p>{message.user}</p>
+                    <p className='client-name'>{client?.name}</p>
+                {messages && messages.length && messages?.map((message,i)=>(
+                    message.user._id == user._id ? 
+                    <div key={i} className='chat-box-native'>
+                        <p>{message.message}</p>
+                        <img alt='dp' src={user.dp} className='dp-msg'/>
+                    </div> :
+                    <div key={i} className='chat-box-foreign'>
+                        <img alt='dp' src={message.user.dp} className='dp-msg'/>
                         <p>{message.message}</p>
                     </div>
                 ))}
             </div>
-            <div className='chat-controllers'>
-                <div><input type='text' placeholder='Enter msg' value={message} onChange={(e) => setMessage(e.target.value)}/></div>
-                <div><button onClick={sendMessage}>Send</button></div>
-            </div>
         </div>
+        
+      <div className='chat-controllers'>
+        <input id='chat-input' type='text' placeholder='Enter msg' value={message} onChange={(e) => setMessage(e.target.value)}/>
+        <button id='chat-input-btn' onClick={sendMessage}>Send</button>
+      </div>
     </div>
   )
 }
