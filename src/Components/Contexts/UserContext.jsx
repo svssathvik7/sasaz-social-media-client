@@ -19,7 +19,8 @@ const UserContext = ({ children }) => {
             phNumber: data.userDetails.phNumber,
             posts: data.userDetails.posts,
             friends: data.userDetails.friends,
-            dp: data.userDetails.dp
+            dp: data.userDetails.dp,
+            _id : data.userDetails._id
         });
     }
     return (
