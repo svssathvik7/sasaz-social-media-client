@@ -46,18 +46,28 @@ export default function Message() {
     ,[user])
   return (
     <div id='chat-container'>
-        <div className='chat-holder'>
-            {messages.map((message,i)=>(
-                <div className='chat-block' key={i}>
-                    <p>{message.user}</p>
-                    <p>{message.message}</p>
+        <div id='online-friends'>
+            {user && user.friends && user.friends.length !== 0 ? user.friends.map(frnd => (
+                <div key={frnd._id} id='friend-div'>
+                <img alt={"Dp"} src={frnd.dp} style={{ width: '50px', height: '50px' }} />
+                <h4>{frnd.name}</h4>
                 </div>
-            ))}
+            )) : <p style={{ color: 'white' }}>No Friends</p>}
+            </div>
+        <div id="chat">
+            <div className='chat-holder'>
+                {messages.map((message,i)=>(
+                    <div className='chat-block' key={i}>
+                        <p>{message.user}</p>
+                        <p>{message.message}</p>
+                    </div>
+                ))}
+            </div>
+            <div className='chat-controllers'>
+                <div><input type='text' placeholder='Enter msg' value={message} onChange={(e) => setMessage(e.target.value)}/></div>
+                <div><button onClick={sendMessage}>Send</button></div>
+            </div>
         </div>
-      <div className='chat-controllers'>
-        <input type='text' placeholder='Enter msg' value={message} onChange={(e) => setMessage(e.target.value)}/>
-        <button onClick={sendMessage}>Send</button>
-      </div>
     </div>
   )
 }

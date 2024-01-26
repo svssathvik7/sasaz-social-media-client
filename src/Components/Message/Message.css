@@ -1,16 +1,46 @@
-.chat-controllers{
-    position: absolute;
-    bottom: 0;
-    margin: 2%;
-    left: 0;right: 0;
-    width: 25dvw;
-    height: fit-content;
-    margin: 2% auto;
+
+#chat-container{
+    display: flex;
+    flex-direction: row;
+} 
+#online-friends{
+    width: 15vw;
+    height: 90vh;
+    background-color: rgb(19, 17, 17);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: flex-start;
 }
-.chat-holder{
-    position: absolute;
-    top: 0;left: 0;right: 0;bottom: 0;margin: auto;
-    width: 50dvw;
-    height: 60dvh;
-    color: black;
+.chat-block{
+    padding: 0 0 0 1rem;
+}
+#chat{
+    display: flex;
+    width: 85vw;
+    height: 90vh;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+#chat-holder{
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.chat-controllers{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 2rem;
+    justify-content: center;
+    align-items: space-evenly;
+}
+.chat-controllers input,button{
+    padding: 0.5rem;
+}
+.chat-block:nth-child(even){
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem 0 0 ;
 }
