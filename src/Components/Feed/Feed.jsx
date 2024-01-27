@@ -187,16 +187,23 @@ const Feed = (props) => {
 
             <div id='comment-block' ref={commentRef}>
                 {post.comments && post.comments.map((comment, ind) => {
-                    return <div key={ind} className='comment-data-header'>
-                        <div className='comment-data'>
-                            <h4>{comment.userCommented} : </h4>
-                            <p>{comment.comment}</p>
+                    return <div className='post-comments'>
+                        <div key={ind} className='comment-data-header'>
+                            <div className='comment-data'>
+                                <h4>{comment.userCommented} : </h4>
+                                <p>{comment.comment}</p>
+                            </div>
+                            <div className='comment-response'>
+                                <img id={comment._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
+                                {comment.likes}
+                                <img id={comment._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
+                            </div>
                         </div>
-                        <div className='comment-response'>
-                            <img id={comment._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
-                            {comment.likes}
-                            <img id={comment._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
-                        </div>
+                        {comment.replies.length !== 0 ? <div className='replies'>
+                            <div className="line"></div>
+                            <p>view replies</p>
+                            <div className="line"></div>
+                        </div> : null}
                     </div>
                 })}
                 {
