@@ -18,6 +18,7 @@ const UserContext = ({ children }) => {
             email: data.userDetails.email,
             phNumber: data.userDetails.phNumber,
             posts: data.userDetails.posts,
+            savedPosts: data.userDetails.savedPosts,
             friends: data.userDetails.friends,
             dp: data.userDetails.dp,
             _id : data.userDetails._id

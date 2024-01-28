@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { userContextProvider } from '../Contexts/UserContext';
 import { emoji } from './Emoji';
 import { useInView } from 'framer-motion';
-import "./Message.css"
+import "./Message.css";
+import EmojiPicker from 'emoji-picker-react';
 import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -46,6 +47,7 @@ export default function Message() {
     const [message, setMessage] = useState('');
     const { user } = useContext(userContextProvider);
     const [client, setClient] = useState(user);
+    const [emoji, setEmoji] = useState(false);
     const fetchMessages = async () => {
         try {
             const names = [user.email, client.email].sort();
@@ -62,6 +64,14 @@ export default function Message() {
             console.log('Error fetching messages:', error);
         }
     }
+    const handleEmojiInput = (emojiObj) =>{
+        try{
+            const newMessage = message + emojiObj.emoji;
+            setMessage(newMessage);
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     const sendMessage = async () => {
         try {
@@ -73,6 +83,7 @@ export default function Message() {
             });
             setMessage('');
             fetchMessages();
+            setEmoji(false);
         } catch (error) {
             console.log('Error fetching messages:', error);
         }
@@ -107,6 +118,7 @@ export default function Message() {
         <div id='chat-container'>
             <div id="major-chat-container">
                 <div id='friends-container'>
+                    <h2>My Friends</h2>
                     {user && user.friends && user.friends.map((frnd, i) => (
                         <div key={i} onClick={() => { setClient(frnd) }} className='frnd-data'>
                             <img alt='dp' src={frnd?.dp} className='dp' />
@@ -115,7 +127,10 @@ export default function Message() {
                     ))}
                 </div>
                 <div className='chat-holder'>
-                    <p className='client-name'>{client?.name}</p>
+                    <div className='client-details'>
+                        <img src={client?.dp} alt='dp' className='client-dp'/>
+                        <p className='client-name'>{client?.name}</p>
+                    </div>
                     {messages && messages.length && messages?.map((message, i) => (
                         message.user._id === user._id ?
                             <div key={i} className='chat-box-native-head'>
@@ -125,7 +140,7 @@ export default function Message() {
                                         return { ...prev, open: !prev.open, messageId: i }
                                     });
                                 }} className='emoji-icon' icon={faFaceSmile} />
-                                <div className='chat-box-native'>
+                                <div className='chat-box-native' >
                                     <p>{message.message}</p>
                                     <img alt='dp' src={user.dp} className='dp-msg' />
                                 </div>
@@ -133,7 +148,7 @@ export default function Message() {
                                     <p>{message.reply}</p>
                                 </div>
                             </div> :
-                            <div key={i} className='chat-box-native-head'>
+                            <div key={i} className='chat-box-foreign-head'>
                                 <div>
                                     <p>{message.reply}</p>
                                 </div>
@@ -154,9 +169,18 @@ export default function Message() {
             </div>
 
             <div className='chat-controllers'>
+                <button id="emoji-input" onClick={() => setEmoji(!emoji)}><FontAwesomeIcon icon = {faFaceSmile} style ={{width:"20px", height:"20px"}} /></button>
+
                 <input id='chat-input' type='text' placeholder='Enter msg' value={message} onChange={(e) => setMessage(e.target.value)} />
                 <button id='chat-input-btn' onClick={sendMessage}>Send</button>
             </div>
+            {emoji && (
+                            <EmojiPicker 
+                                onEmojiClick={handleEmojiInput}
+                                className = "emoji-picker"
+                            />
+                        )
+                }
         </div>
     )
 }
