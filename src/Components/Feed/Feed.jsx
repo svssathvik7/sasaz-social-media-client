@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import { motion, useInView } from "framer-motion";
 import { faBars, faReply } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,9 @@ import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
 const Feed = (props) => {
+    useEffect(()=>{
+        console.log(props);
+    })
     const [post, setPost] = useState({
         _id: props.data._id,
         type: props.type || 'post',
