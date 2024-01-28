@@ -24,7 +24,8 @@ const Feed = (props) => {
     const [topBar, setTopBar] = useState(false);
     const ref = useRef(null);
     const commentRef = useRef(null);
-    const { user: { name, email } } = useContext(userContextProvider);
+    const {user} = useContext(userContextProvider)
+    const { user: { _id, name, email } } = useContext(userContextProvider);
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
     const [reply, setReply] = useState({
@@ -85,6 +86,23 @@ const Feed = (props) => {
         } catch (error) {
             console.log(error);
         }
+    }
+    const handlePostSave = async (e) =>{
+        try {
+                const response = (await axios.post("http://localhost:5001/api/user/addSavedPosts/", {
+                    userId: user._id,
+                    postId: props.data._id,
+                    operation: "add"
+                })).data;
+                if (response.status) {
+                    console.log("Successfully Saved!")
+                }
+                else {
+                    console.log(response);
+                }
+            } catch (err) {
+                console.log(err);
+            }
     }
     const likeComment = async (e) => {
         const commentId = e.target.id;
@@ -155,14 +173,14 @@ const Feed = (props) => {
                 <div className='font-awesome-icon'>
                     <FontAwesomeIcon onClick={openTopBar} icon={faBars} />
                     {topBar && <div id="top-bar-section">
-                        <p>Save</p>
+                        <p onClick={handlePostSave}>Save</p>
                         <p onClick={handlePostDelete}>Delete</p>
                     </div>}
                 </div>
 
             </div>
             <div id='post'>
-                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl} />}
+                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl}/>}
             </div>
             <div id='post-metrics'>
                 <div id='metrics'>

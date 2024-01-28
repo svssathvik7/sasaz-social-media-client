@@ -12,7 +12,7 @@ const Home = () => {
         <div id='feed-section'>
           {user && user.posts && user.posts.map((post, ind) => (
             <div key={ind}>
-              <Feed data={post} name={user.name} dp={user.dp} />
+              <Feed data={post} name={user.name} dp={user.dp}/>
             </div>
           ))}
         </div>
