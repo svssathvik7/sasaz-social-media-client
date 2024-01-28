@@ -162,7 +162,7 @@ const Feed = (props) => {
 
             </div>
             <div id='post'>
-                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl} />}
+                {post.type === "tweet" ? <h4>{post?.imageUrl}</h4> : <img alt='post' src={post?.imageUrl} />}
             </div>
             <div id='post-metrics'>
                 <div id='metrics'>
@@ -186,20 +186,20 @@ const Feed = (props) => {
 
 
             <div id='comment-block' ref={commentRef}>
-                {post.comments && post.comments.map((comment, ind) => {
+                {post && post.comments && post.comments.map((comment, ind) => {
                     return <div className='post-comments'>
                         <div key={ind} className='comment-data-header'>
                             <div className='comment-data'>
-                                <h4>{comment.userCommented} : </h4>
-                                <p>{comment.comment}</p>
+                                <h4>{comment ? comment.userCommented : "#"} : </h4>
+                                <p>{comment ? comment.comment : "#"}</p>
                             </div>
                             <div className='comment-response'>
-                                <img id={comment._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
-                                {comment.likes}
-                                <img id={comment._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
+                                <img id={comment?._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
+                                {comment?.likes}
+                                <img id={comment?._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
                             </div>
                         </div>
-                        {comment.replies.length !== 0 ? <div className='replies'>
+                        {comment && comment.replies && comment.replies.length !== 0 ? <div className='replies'>
                             <div className="line"></div>
                             <p>view replies</p>
                             <div className="line"></div>
