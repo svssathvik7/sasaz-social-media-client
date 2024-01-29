@@ -27,10 +27,13 @@ const Feed = (props) => {
     const [topBar, setTopBar] = useState(false);
     const ref = useRef(null);
     const commentRef = useRef(null);
-    const {user} = useContext(userContextProvider)
-    const { user: { _id, name, email } } = useContext(userContextProvider);
+    const { user: { name, email, dp } } = useContext(userContextProvider);
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
+    const [openReply, setOpenReply] = useState({
+        open: false,
+        cId: '',
+    });
     const [reply, setReply] = useState({
         actualReply: '',
         open: false,
@@ -125,7 +128,7 @@ const Feed = (props) => {
     const postComment = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email });
+            const response = await axios.post('http://localhost:5001/api/user/comment', { pId: post._id, comment, name, email, dp: dp });
             const data = response.data;
             console.log(data);
             setPost((prevValue) => {
@@ -140,13 +143,25 @@ const Feed = (props) => {
     const postReply = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/user/reply', { pId: post._id, reply: reply.actualReply, cId: reply.cId, email: email });
+            const response = await axios.post('http://localhost:5001/api/user/reply', { pId: post._id, reply: reply.actualReply, cId: reply.cId, email: email, name: name, dp: dp });
             const data = response.data;
-            console.log(data.message);
-            setReply((prev) => {
-                return { ...prev, open: !prev.open, cId: '', reply: '' }
-            });
-
+            if (data.status) {
+                const newComments = post?.comments?.map((comment) => {
+                    if (comment._id === reply.cId) {
+                        comment.replies.push(data?.reply);
+                    }
+                    return comment;
+                });
+                setPost((prev) => {
+                    return { ...prev, comments: newComments }
+                })
+                setReply((prev) => {
+                    return { ...prev, open: !prev.open, cId: '', reply: '' }
+                });
+            }
+            else {
+                console.log(data.message);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -154,6 +169,12 @@ const Feed = (props) => {
     const openReplyBar = (e) => {
         const commentId = e.target.id;
         setReply((prev) => {
+            return { ...prev, open: !prev.open, cId: commentId }
+        });
+    }
+    const viewReplies = (e) => {
+        const commentId = e.target.id;
+        setOpenReply((prev) => {
             return { ...prev, open: !prev.open, cId: commentId }
         });
     }
@@ -207,12 +228,16 @@ const Feed = (props) => {
 
 
             <div id='comment-block' ref={commentRef}>
-                {post && post.comments && post.comments.map((comment, ind) => {
-                    return <div className='post-comments'>
-                        <div key={ind} className='comment-data-header'>
+                {post.comments && post.comments.map((comment, ind) => {
+                    return <div key={ind} className='post-comments'>
+                        <div className='comment-data-header'>
                             <div className='comment-data'>
-                                <h4>{comment ? comment.userCommented : "#"} : </h4>
-                                <p>{comment ? comment.comment : "#"}</p>
+                                <div className='user-commented'>
+                                    <img src={comment.dp} alt="commented-user-dp" />
+                                    <h4>{comment.userCommented} : </h4>
+
+                                </div>
+                                <p>{comment.comment}</p>
                             </div>
                             <div className='comment-response'>
                                 <img id={comment?._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
@@ -220,9 +245,20 @@ const Feed = (props) => {
                                 <img id={comment?._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
                             </div>
                         </div>
-                        {comment && comment.replies && comment.replies.length !== 0 ? <div className='replies'>
+                        {openReply.open === true && openReply.cId === comment._id && <div className='replies-block'>
+                            {comment?.replies?.map((reply, ind) => {
+                                return <div key={ind} className='reply'>
+                                    <div className='user-replied'>
+                                        <img src={reply.dp} alt='profile-pic'></img>
+                                        <p>{reply.name}</p>
+                                    </div>
+                                    <p>{reply.reply}</p>
+                                </div>
+                            })}
+                        </div>}
+                        {comment?.replies?.length !== 0 ? <div className='toggle-reply-block'>
                             <div className="line"></div>
-                            <p>view replies</p>
+                            <p id={comment._id} onClick={viewReplies}>{openReply.open === false ? "view replies" : "close replies"}</p>
                             <div className="line"></div>
                         </div> : null}
                     </div>

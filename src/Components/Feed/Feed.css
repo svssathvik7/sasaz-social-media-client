@@ -188,20 +188,21 @@
     padding-bottom: 1em;
 }
 
-.post-comments .replies p {
+.post-comments .toggle-reply-block p {
     font-size: .8em;
 }
 
-.post-comments .replies {
+.post-comments .toggle-reply-block {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
+    padding: 1em 0em;
     cursor: pointer;
 }
 
-.post-comments .replies .line {
+.post-comments .toggle-reply-block .line {
     width: 20%;
     height: 1px;
     background-color: black;
@@ -263,4 +264,39 @@
     background-color: rgb(28, 26, 26);
     color: white;
     width: 7em;
+}
+
+.replies-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.replies-block .reply {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1em 0em;
+}
+
+.replies-block .reply p {
+    max-width: 10em;
+    text-align: justify;
+}
+
+.replies-block .reply img,
+.user-commented img {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    object-fit: fill;
+}
+
+.user-replied,
+.user-commented {
+    display: flex;
+    gap: 5px;
+    align-items: center;
 }
