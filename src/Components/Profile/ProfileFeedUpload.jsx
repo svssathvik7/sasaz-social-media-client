@@ -52,6 +52,7 @@ const ProfileFeedUpload = (props) => {
                     <option name='category' value="Fashion">Fashion</option>
                     <option name='category' value="Gaming">Gaming</option>
                     <option name='category' value="Space">Space</option>
+                    <option name='category' value="Other">Other</option>
                 </select>
                 <button type='submit'>Post</button>
             </form>

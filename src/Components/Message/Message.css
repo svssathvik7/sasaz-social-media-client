@@ -36,6 +36,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.active-dot,
+.offline-dot {
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 5%;
+    right: 0%;
+}
+
+.active-dot {
+    background-color: green;
+}
+
+.offline-dot {
+    background-color: red;
 }
 
 .chat-holder {

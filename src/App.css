@@ -22,3 +22,17 @@ a {
   height: 100dvh;
   overflow: hidden;
 }
+
+.pre-loader {
+  position: absolute;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pre-loader svg {
+  width: 10em !important;
+  height: 10em !important;
+}

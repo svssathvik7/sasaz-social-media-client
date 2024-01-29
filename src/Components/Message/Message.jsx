@@ -111,6 +111,8 @@ export default function Message() {
                         <div key={i} onClick={() => { setClient(frnd) }} className='frnd-data'>
                             <img alt='dp' src={frnd?.dp} className='dp' />
                             <p>{frnd?.name}</p>
+                            <div className='active-dot'></div>
+                            {/* <div className='offline-dot'></div> */}
                         </div>
                     ))}
                 </div>
