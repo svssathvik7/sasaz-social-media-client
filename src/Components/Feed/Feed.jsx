@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import { motion, useInView } from "framer-motion";
 import { faBars, faReply } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,9 @@ import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
 const Feed = (props) => {
+    useEffect(()=>{
+        console.log(props);
+    })
     const [post, setPost] = useState({
         _id: props.data._id,
         type: props.type || 'post',
@@ -89,6 +92,23 @@ const Feed = (props) => {
         } catch (error) {
             console.log(error);
         }
+    }
+    const handlePostSave = async (e) =>{
+        try {
+                const response = (await axios.post("http://localhost:5001/api/user/addSavedPosts/", {
+                    userId: user._id,
+                    postId: props.data._id,
+                    operation: "add"
+                })).data;
+                if (response.status) {
+                    console.log("Successfully Saved!")
+                }
+                else {
+                    console.log(response);
+                }
+            } catch (err) {
+                console.log(err);
+            }
     }
     const likeComment = async (e) => {
         const commentId = e.target.id;
@@ -177,14 +197,14 @@ const Feed = (props) => {
                 <div className='font-awesome-icon'>
                     <FontAwesomeIcon onClick={openTopBar} icon={faBars} />
                     {topBar && <div id="top-bar-section">
-                        <p>Save</p>
+                        <p onClick={handlePostSave}>Save</p>
                         <p onClick={handlePostDelete}>Delete</p>
                     </div>}
                 </div>
 
             </div>
             <div id='post'>
-                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl} />}
+                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl}/>}
             </div>
             <div id='post-metrics'>
                 <div id='metrics'>
@@ -220,9 +240,9 @@ const Feed = (props) => {
                                 <p>{comment.comment}</p>
                             </div>
                             <div className='comment-response'>
-                                <img id={comment._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
-                                {comment.likes}
-                                <img id={comment._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
+                                <img id={comment?._id} onClick={likeComment} style={{ width: '1em', height: '1em' }} src={heartImage} alt="heart" />
+                                {comment?.likes}
+                                <img id={comment?._id} onClick={openReplyBar} style={{ width: '1em', height: '1em' }} src={replyImage} alt="reply" />
                             </div>
                         </div>
                         {openReply.open === true && openReply.cId === comment._id && <div className='replies-block'>

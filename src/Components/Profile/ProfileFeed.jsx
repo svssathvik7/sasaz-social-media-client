@@ -9,7 +9,7 @@ const ProfileFeed = () => {
         <div id='profile-feed-main'>
             {user && user.posts && user.posts.map((post, ind) => (
                 <div key={ind}>
-                    <Feed data={post} dp={user ? user.dp : "#"} username={user ? user.name : "User"} />
+                    <Feed data={post} dp={user ? user.dp : "#"} name={user ? user.name : "User"} />
                 </div>
             ))}
             <nav id='profile-navigation'>
