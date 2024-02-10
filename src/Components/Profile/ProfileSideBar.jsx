@@ -5,21 +5,15 @@ const ProfileSideBar = (props) => {
     return (
         <div id='profile-sidebar'>
             <div id='profile-sidebar-main'>
-                <img src={image} alt="Profile Image" />
+                <img src={image} alt="Profile" />
                 <h1>SasaAz</h1>
                 <p>A Good Project Together....</p>
             </div>
             <ul>
                 <button id='1' onClick={props.changeFunction}>Details</button>
                 <button id='2' onClick={props.changeFunction}>Posts</button>
-<<<<<<< HEAD
                 <button id='3' onClick={props.changeFunction}>Upload Post</button>
                 <button id='4' onClick={props.changeFunction}>Saved Posts</button>
-=======
-                <button id='3' onClick={props.changeFunction}>Upload Posts</button>
-                <button id="5" onClick={props.changeFunction}>Saved Posts</button>
-                <button id='4' onClick={props.changeFunction}>Log Out</button>
->>>>>>> eef933fbb12c4d0d430bf7e77c687b2cabc91852
             </ul>
         </div>
     )

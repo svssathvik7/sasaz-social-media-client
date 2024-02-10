@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ProfileSideBar from './ProfileSideBar';
 import './Profile.css';
 import ProfileEdit from './ProfileEdit';
@@ -14,8 +14,8 @@ const Profile = () => {
         <div id='profile-main'>
             <ProfileSideBar changeFunction={changeFunction} />
             <div id='profile-dynamics'>
-                {current === '1' ? <ProfileEdit /> : current === '2' ? <ProfileFeed /> : current === '3' ? <ProfileFeedUpload /> : 
-                 current ==='5' ? <ProfileSavedPosts /> : null}
+                {current === '1' ? <ProfileEdit /> : current === '2' ? <ProfileFeed /> : current === '3' ? <ProfileFeedUpload /> :
+                    current === '5' ? <ProfileSavedPosts /> : null}
             </div>
         </div>
     )

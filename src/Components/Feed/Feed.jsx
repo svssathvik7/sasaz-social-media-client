@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from 'react'
 import { motion, useInView } from "framer-motion";
-import { faBars, faReply } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
@@ -12,7 +12,7 @@ import './Feed.css';
 import axios from 'axios';
 import { userContextProvider } from '../Contexts/UserContext';
 const Feed = (props) => {
-    useEffect(()=>{
+    useEffect(() => {
         console.log(props);
     })
     const [post, setPost] = useState({
@@ -27,7 +27,7 @@ const Feed = (props) => {
     const [topBar, setTopBar] = useState(false);
     const ref = useRef(null);
     const commentRef = useRef(null);
-    const { user: { name, email, dp } } = useContext(userContextProvider);
+    const { user: { _id, name, email, dp } } = useContext(userContextProvider);
     const [heart, setHeart] = useState(false);
     const [comment, setComment] = useState('');
     const [openReply, setOpenReply] = useState({
@@ -93,22 +93,22 @@ const Feed = (props) => {
             console.log(error);
         }
     }
-    const handlePostSave = async (e) =>{
+    const handlePostSave = async (e) => {
         try {
-                const response = (await axios.post("http://localhost:5001/api/user/addSavedPosts/", {
-                    userId: user._id,
-                    postId: props.data._id,
-                    operation: "add"
-                })).data;
-                if (response.status) {
-                    console.log("Successfully Saved!")
-                }
-                else {
-                    console.log(response);
-                }
-            } catch (err) {
-                console.log(err);
+            const response = (await axios.post("http://localhost:5001/api/user/addSavedPosts/", {
+                userId: _id,
+                postId: props.data._id,
+                operation: "add"
+            })).data;
+            if (response.status) {
+                console.log("Successfully Saved!")
             }
+            else {
+                console.log(response);
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
     const likeComment = async (e) => {
         const commentId = e.target.id;
@@ -204,7 +204,7 @@ const Feed = (props) => {
 
             </div>
             <div id='post'>
-                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl}/>}
+                {post.type === "tweet" ? <h4>{post.imageUrl}</h4> : <img alt='post' src={post.imageUrl} />}
             </div>
             <div id='post-metrics'>
                 <div id='metrics'>

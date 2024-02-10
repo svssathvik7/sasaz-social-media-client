@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import Feed from '../Feed/Feed'
 import { Link } from 'react-router-dom'
 import { userContextProvider } from '../Contexts/UserContext'
-import { userPostsContext } from '../Contexts/UserPostContext'
 const ProfileFeed = () => {
     const { user } = useContext(userContextProvider);
     return (
