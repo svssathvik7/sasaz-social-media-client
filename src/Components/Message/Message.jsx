@@ -2,8 +2,7 @@ import axios from 'axios';
 import React, { useContext, useRef } from 'react'
 import { useState, useEffect } from 'react'
 import { userContextProvider } from '../Contexts/UserContext';
-import ScrollToBottom from 'react-scroll-to-bottom'
-import { css } from '@emotion/css';
+import ScrollToBottom from 'react-scroll-to-bottom';
 import io from 'socket.io-client';
 import { emoji } from './Emoji';
 import { useInView } from 'framer-motion';
@@ -11,11 +10,10 @@ import "./Message.css";
 import EmojiPicker from 'emoji-picker-react';
 import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-const socket = io.connect("http://localhost:5001");
-const ROOT_CSS = css({
-    height: 600,
-    width: 400
-});
+//This is used to connect to the socket io connection made in server.
+const socket = io.connect("http://localhost:5001");//url to be changed in production.
+
+
 function Emoji(props) {
     const { messageId, toggleEmoji, reactEmojiToMessage } = props;
     const emojiRef = useRef(null);
@@ -63,6 +61,8 @@ export default function Message() {
             scrollTrigger.current.scrollTop = scrollTrigger.current.scrollHeight;
         }
     }
+
+    //This function is used to fecth the messages whenever user sends or recives messages.
     const fetchMessages = async (uniqueChatId) => {
         try {
             const response = (await axios.post("http://localhost:5001/api/chat/messages/", {
@@ -87,6 +87,8 @@ export default function Message() {
         }
     }
 
+    //Function used to send messages using socket io by emitting the send_message event and recieveing it in the backend..
+
     const sendMessage = async (e) => {
         try {
             e.preventDefault();
@@ -95,6 +97,7 @@ export default function Message() {
             const chatInput = document.getElementById('chat-input');
             chatInput.value = '';
             chatInput.focus();
+            fetchMessages(roomChat);
             setEmoji(false);
         } catch (error) {
             console.log('Error fetching messages:', error);
@@ -122,6 +125,7 @@ export default function Message() {
         const data = response.data;
         console.log(data);
     }
+    //function used to create a unique id using id's of both the users, and emitting the join_chat_room event with the uniquechatId.
     const makeChatRoom = (frnd) => {
         const uniqueId = [user._id, frnd._id].sort();
         const uniqueChatId = uniqueId[0] + uniqueId[1];
@@ -131,9 +135,8 @@ export default function Message() {
     }
     useEffect(
         () => {
+            //Whenever user recives message it will update the state variable
             socket.on('receive_message', (data) => {
-                const messageObject = data.messageObject;
-                setMessage([...messages, messageObject]);
                 fetchMessages(data.data.roomChat);
             });
 
